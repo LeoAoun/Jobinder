@@ -1,4 +1,4 @@
-interface Profile {
+interface User {
   phone: string;
   fullName: string;
   password: string;
@@ -16,7 +16,7 @@ interface Profile {
   };
 }
 
-interface ProfileDTO {
+interface UserDTO {
   phone: string;
   fullName: string;
   serviceProfile?: {
@@ -32,4 +32,4 @@ interface ProfileDTO {
   };
 }
 
-export type { Profile, ProfileDTO };
+export type { User, UserDTO };

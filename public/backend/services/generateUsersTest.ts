@@ -1,9 +1,8 @@
 import axios from "axios";
 import bcrypt from "bcryptjs-react";
-
 import { getCities } from "./location";
 
-import { Profile } from "../../src/interfaces/Profile";
+import { User, UserDTO } from "../../../src/interfaces/User";
 
 const imgs = [
   "adv1.jpeg",
@@ -72,23 +71,17 @@ const availabilityList = [
 ];
 
 const usersToGenerate: number = 5;
-let usersTest = {};
 
 const getRandomUsers = async () => {
-  let users = localStorage.getItem("users");
-  if (users) {
-    return JSON.parse(users);
-  } else {
-    axios
-      .get(`https://randomuser.me/api/?results=${usersToGenerate}&nat=br`)
-      .then((response) => {
-        console.log(response.data.results);
-        users = response.data.results;
-        return users;
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  try {
+    const response = await axios.get(
+      `https://randomuser.me/api/?results=${usersToGenerate}&nat=br`
+    );
+    const users = response.data.results;
+    return users;
+  } catch (error) {
+    console.error("Error fetching random users:", error);
+    return [];
   }
 };
 
@@ -101,43 +94,44 @@ const getSpecialty = (index: number): string => {
 };
 
 const createUsersTest = async () => {
-  const users = await getRandomUsers();
-  const cities = getCities("SP");
+  let usersTest: Record<string, User> = {};
 
-  users.forEach((user, index: number) => {
+  const users = await getRandomUsers();
+  const cities = await getCities("SP");
+
+  users.forEach((user: any, index: number) => {
     const phone = user.cell.replace(/[^0-9]/g, "");
-    const id = phone;
     const hashPassword = bcrypt.hashSync(user.login.password, 10);
 
     const randomRating = Math.floor(Math.random() * 5) + 1;
     const randomServicesPerformed = Math.floor(Math.random() * 100);
-    const getRandomCity = Math.floor(Math.random() * cities.length);
-    const randomAvailability = Math.floor(Math.random() * availabilityList.length);
-    const specialtyChoosed: string = getSpecialty(index);
+    const getRandomCity = cities[Math.floor(Math.random() * cities.length)];
+    const randomAvailability =
+      availabilityList[Math.floor(Math.random() * availabilityList.length)];
 
-    const userTest: Record<string, Profile> = {
-      [id]: {
-        phone,
-        fullName: `${user.name.first} ${user.name.last}`,
-        password: hashPassword,
-        serviceProfile: {
-          serviceImg: `../public/assets/${imgs[index]}`,
-          servicesPerformed: randomServicesPerformed,
-          rating: randomRating,
-          specialty: specialtyChoosed,
-          availability: randomAvailability,
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc",
-          location: {
-            city: getRandomCity,
-            state: "SP",
-          },
+    const userTest: User = {
+      phone,
+      fullName: `${user.name.first} ${user.name.last}`,
+      password: hashPassword,
+      serviceProfile: {
+        serviceImg: `assets/images/${imgs[index]}`,
+        servicesPerformed: randomServicesPerformed,
+        rating: randomRating,
+        specialty: getSpecialty(index),
+        availability: randomAvailability,
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc",
+        location: {
+          city: getRandomCity,
+          state: "SP",
         },
       },
     };
 
-    usersTest = { ...usersTest, ...userTest };
+    usersTest[phone] = userTest;
   });
+
+  return usersTest;
 };
 
-export { getRandomUsers };
+export { getRandomUsers, createUsersTest };

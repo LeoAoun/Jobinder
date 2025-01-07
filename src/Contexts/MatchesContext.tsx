@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { ProfileDTO } from "../interfaces/Profile";
+import { UserDTO } from "../interfaces/User";
 
 // Define o tipo do contexto
 interface MatchesContextType {
-  matches: ProfileDTO[];
-  setMatches: React.Dispatch<React.SetStateAction<ProfileDTO[]>>;
+  matches: UserDTO[];
+  setMatches: React.Dispatch<React.SetStateAction<UserDTO[]>>;
 }
 
 // Inicializa o contexto
@@ -12,7 +12,7 @@ const MatchContext = createContext<MatchesContextType | undefined>(undefined);
 
 // Componente Provider
 export const MatchesProvider = ({ children }: { children: ReactNode }) => {
-  const [matches, setMatches] = useState<ProfileDTO[]>([]);
+  const [matches, setMatches] = useState<UserDTO[]>([]);
 
   return (
     <MatchContext.Provider value={{ matches, setMatches }}>

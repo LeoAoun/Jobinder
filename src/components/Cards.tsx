@@ -1,17 +1,27 @@
-import { useState } from "react";
+import "../styles/components/Card.css";
+
+import { useEffect, useState } from "react";
 import TinderCard from "react-tinder-card";
 
-import { Profile, ProfileDTO } from "../interfaces/Profile";
-import { useMatches } from "../Contexts/MatchesContext";
+import { UserDTO } from "../interfaces/User.ts";
 
-export default function Card() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  
-  const [profiles, setProfiles] = useState<ProfileDTO[]>();
-  const [removedProfiles, setRemovedProfiles] = useState<ProfileDTO[]>([]);
+import { useUsersDTO } from "../contexts/UsersDTOContext.tsx";
+import { useMatches } from "../contexts/MatchesContext.tsx";
+
+export default function Cards() {
+  const { usersDTO } = useUsersDTO();
+
+  const [profiles, setProfiles] = useState<UserDTO[]>([]);
+  const [removedProfiles, setRemovedProfiles] = useState<UserDTO[]>([]);
   const { matches, setMatches } = useMatches();
 
-  const handleSwipe = (direction: string, profile: ProfileDTO) => {
+  useEffect(() => {
+    if (usersDTO) {
+      setProfiles(Object.values(usersDTO));
+    }
+  }, [usersDTO]);
+
+  const handleSwipe = (direction: string, profile: UserDTO) => {
     if (direction === "left") {
       setRemovedProfiles((prev) => [profile, ...prev]);
     } else if (direction === "right") {
@@ -40,34 +50,31 @@ export default function Card() {
         >
           <div className="card">
             <span className="location">Adolfo, São Paulo</span>
-            <img src="../public/assets/adv1.jpeg" />
+            <img src={profile.serviceProfile?.serviceImg} />
             <div className="info">
               <h3>{profile.fullName}</h3>
               <div>
                 <span>Especialidade:</span>
-                <span>sAUDE</span>
+                <span>{profile.serviceProfile?.specialty}</span>
               </div>
               <div>
                 <span>Disponibilidade:</span>
-                <span>Segudna a sexta</span>
+                <span>{profile.serviceProfile?.availability}</span>
               </div>
               <div>
                 <span>Descrição:</span>
-                <span>
-                  Experiencia em
-                  exammasdjksakdskaaksdasdkexammasdjksakdskaaksdasdkexammasdjksakdskaaksdasdk
-                </span>
+                <span>{profile.serviceProfile?.description}</span>
               </div>
             </div>
             <div className="buttons">
-              <button>
-                <img src="../public/assets/buttons/cancel.png" />
+              <button onClick={() => handleSwipe("left", profile)}>
+                <img src="../assets/buttons/cancel.png" />
               </button>
               <button onClick={undoLast}>
-                <img src="../public/assets/buttons/voltar.png" />
+                <img src="../assets/buttons/voltar.png" />
               </button>
-              <button>
-                <img src="../public/assets/buttons/confirme.png" />
+              <button onClick={() => handleSwipe("right", profile)}>
+                <img src="../assets/buttons/confirme.png" />
               </button>
             </div>
           </div>

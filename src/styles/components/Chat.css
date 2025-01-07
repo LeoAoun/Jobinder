@@ -1,0 +1,88 @@
+.chat-container {
+  background-image: linear-gradient(to right top, #365462, #3e5d6c, #456776, #4d7181, #557b8b);
+  width: 30rem;
+  height: 100vh;
+  gap: 2rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-container .chat-header {
+  display: flex;
+  align-items: center;
+}
+
+.chat-container .chat-header h2 {
+  color: #fff;
+  margin: 1rem;
+}
+
+.chat-container .chat-header input {
+  border: none;
+  appearance: none;
+  outline: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.chat-container .chat-list {
+  width: 100%;
+  gap: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chat-container .chat-box {
+  cursor: pointer;
+  background-color: var(--blue);
+
+  width: 90%;
+  padding: 0.5rem 1rem 0.5rem;
+  border-radius: 0.5rem;
+  gap: 1rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-container .chat-box .chat-box-info {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.chat-container .chat-box .img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.chat-container .chat-box .name-and-last-message {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-container .chat-box .name-and-last-message .name {
+  color: #fff;
+}
+
+.chat-container .chat-box .name-and-last-message .last-message {
+  color: #b8b8b8;
+  font-size: 0.8rem;
+}
+
+.chat-container .chat-box .delete-chat {
+  cursor: pointer;
+  color: var(--red);
+  font-weight: 600;
+  font-size: 1.5rem;
+
+  border: none;
+  background: none;
+}
