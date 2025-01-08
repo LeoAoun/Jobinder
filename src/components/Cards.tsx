@@ -4,31 +4,64 @@ import { useEffect, useState } from "react";
 import TinderCard from "react-tinder-card";
 
 import { UserDTO } from "../interfaces/User.ts";
-
 import { useUsersDTO } from "../contexts/UsersDTOContext.tsx";
 import { useMatches } from "../contexts/MatchesContext.tsx";
 
+import { addMatch, getMatches } from "../../backend/services/matchServices.ts";
+
 export default function Cards() {
+  const loggedUserId: string = "-1";
   const { usersDTO } = useUsersDTO();
 
   const [profiles, setProfiles] = useState<UserDTO[]>([]);
   const [removedProfiles, setRemovedProfiles] = useState<UserDTO[]>([]);
   const { matches, setMatches } = useMatches();
 
+  // Fetch matches from the database
   useEffect(() => {
-    if (usersDTO) {
-      setProfiles(Object.values(usersDTO));
+    const fetchMatches = async () => {
+      try {
+        const matchesFromDB = await getMatches();
+        setMatches(matchesFromDB);
+      } catch (error) {
+        console.error("Erro ao buscar matches do banco de dados:", error);
+      }
+    };
+
+    fetchMatches(); 
+  }, [setMatches]);
+
+  // Update profiles state when usersDTO and matches are changed
+  useEffect(() => {
+    if (usersDTO && matches) {
+      // Get the matches of the logged user
+      const matchedIds = matches[loggedUserId] || [];
+
+      // Filter the profiles that are not matched
+      const notMatchedProfiles = Object.values(usersDTO).filter(
+        (profile) => !matchedIds.includes(profile.phone) && profile.phone !== loggedUserId
+      );
+
+      setProfiles(notMatchedProfiles);
     }
-  }, [usersDTO]);
+  }, [usersDTO, matches, loggedUserId]);
 
   const handleSwipe = (direction: string, profile: UserDTO) => {
-    if (direction === "left") {
-      setRemovedProfiles((prev) => [profile, ...prev]);
-    } else if (direction === "right") {
-      setMatches((prev) => [profile, ...prev]);
+    switch (direction) {
+      case "left":
+        setRemovedProfiles((prev) => [profile, ...prev]);
+        break;
+      case "right":
+        addMatch(loggedUserId, profile.phone);
+        setMatches((prev) => ({
+          ...prev,
+          [loggedUserId]: [...(prev[loggedUserId] || []), profile.phone],
+        }));
+        break;
+      default:
+        break;
     }
-    setProfiles((prev) => prev.filter((p) => p.fullName !== profile.fullName));
-    console.log(matches);
+    setProfiles((prev) => prev.filter((p) => p.phone !== profile.phone));
   };
 
   const undoLast = () => {
@@ -40,7 +73,7 @@ export default function Cards() {
   };
 
   return (
-    <div className="cardContainer">
+    <div className="card-container">
       {profiles.map((profile, index) => (
         <TinderCard
           key={index}

@@ -2,7 +2,8 @@ import axios from "axios";
 import bcrypt from "bcryptjs-react";
 import { getCities } from "./location";
 
-import { User, UserDTO } from "../../../src/interfaces/User";
+import { User } from "../interfaces/User";
+import { getUsers, createUsers } from "./userServices";
 
 const imgs = [
   "adv1.jpeg",
@@ -94,11 +95,16 @@ const getSpecialty = (index: number): string => {
 };
 
 const createUsersTest = async () => {
-  let usersTest: Record<string, User> = {};
+  const usersExists = await getUsers();
+
+  if (Object.keys(usersExists).length > 0) return usersExists;
+
+  const usersTest: Record<string, User> = {};
 
   const users = await getRandomUsers();
   const cities = await getCities("SP");
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   users.forEach((user: any, index: number) => {
     const phone = user.cell.replace(/[^0-9]/g, "");
     const hashPassword = bcrypt.hashSync(user.login.password, 10);
@@ -130,6 +136,8 @@ const createUsersTest = async () => {
 
     usersTest[phone] = userTest;
   });
+
+  await createUsers(usersTest);
 
   return usersTest;
 };

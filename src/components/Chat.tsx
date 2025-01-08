@@ -1,8 +1,35 @@
-import { useMatches } from "../contexts/MatchesContext";
 import "../styles/components/Chat.css";
+import { useEffect, useState } from "react";
+
+import { UserDTO } from "../interfaces/User";
+import { useMatches } from "../contexts/MatchesContext";
+import { getUserDTO } from "../../backend/services/userServices";
+import { getMatch } from "../../backend/services/matchServices";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Chat() {
-  const { matches, setMatches } = useMatches();
+  const { loggedUserId } = useAuth();
+  const { matches } = useMatches();
+  const [usersMatchedDTO, setUsersMatchedDTO] = useState<UserDTO[]>([]);
+
+  useEffect(() => {
+    const fetchUsersMatchedDTO = async () => {
+      const matchIds = await getMatch(loggedUserId);
+
+      if (matchIds) {
+        const fetchedUsers = await Promise.all(
+          matchIds.map(async (matchId) => {
+            const userDTO = await getUserDTO(matchId);
+            return userDTO;
+          })
+        );
+
+        setUsersMatchedDTO(fetchedUsers);
+      }
+    };
+
+    fetchUsersMatchedDTO();
+  }, [matches]);
 
   return (
     <div className="chat-container">
@@ -11,18 +38,18 @@ export default function Chat() {
         <input type="text" placeholder="Localizar Contato" />
         <button>Fechar</button>
       </div>
-      {matches.length > 0 ? (
+      {usersMatchedDTO.length > 0 ? (
         <ul className="chat-list">
-          {matches.length > 0 ? (
-            matches.map((match, index) => {
-              const splitName = match.fullName.split(" ");
+          {usersMatchedDTO.length > 0 ? (
+            usersMatchedDTO.map((userDTO: UserDTO, index: number) => {
+              const splitName = userDTO.fullName.split(" ");
               const firstName = splitName[0];
               const lastName = splitName[splitName.length - 1];
 
               return (
                 <li key={index} className="chat-box">
                   <div className="chat-box-info">
-                    <img className="img" src={match.serviceProfile?.serviceImg} />
+                    <img className="img" src={userDTO.serviceProfile?.serviceImg} />
                     <div className="name-and-last-message">
                       <span className="name">{`${firstName} ${lastName}`}</span>
                       <span className="last-message">aaa</span>
