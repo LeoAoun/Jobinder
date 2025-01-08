@@ -1,9 +1,9 @@
 import axios from "axios";
 import bcrypt from "bcryptjs-react";
-import { getCities } from "./location";
+import { getCities } from "../services/location";
 
 import { User } from "../interfaces/User";
-import { getUsers, createUsers } from "./userServices";
+import { getUsers, createUsers } from "../services/userServices";
 
 const imgs = [
   "adv1.jpeg",
@@ -94,11 +94,7 @@ const getSpecialty = (index: number): string => {
   return specialtiesList[cyclicIndex];
 };
 
-const createUsersTest = async () => {
-  const usersExists = await getUsers();
-
-  if (Object.keys(usersExists).length > 0) return usersExists;
-
+const createFakeUsers = async () => {
   const usersTest: Record<string, User> = {};
 
   const users = await getRandomUsers();
@@ -142,4 +138,4 @@ const createUsersTest = async () => {
   return usersTest;
 };
 
-export { getRandomUsers, createUsersTest };
+export { getRandomUsers, createFakeUsers };

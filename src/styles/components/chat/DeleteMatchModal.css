@@ -1,0 +1,64 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.8);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  inset: 0;
+}
+
+.modal .modal-container {
+  background-color: var(--blue);
+  color: #fff;
+
+  width: 20rem;
+  padding: 1rem;
+  gap: 1.5rem;
+  border-radius: 1rem;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal .modal-container .modal-info {
+  font-size: 1.2rem;
+  gap: 1.5rem;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.modal .modal-container .buttons {
+  display: flex;
+  gap: 2rem;
+}
+
+.modal .modal-container .buttons button {
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+}
+
+.modal .modal-container .buttons .cancel {
+  background-color: var(--red);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--darkRed);
+  }
+}
+
+.modal .modal-container .buttons .confirm {
+  background-color: var(--green);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--darkGreen);
+  }
+}

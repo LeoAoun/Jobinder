@@ -1,0 +1,21 @@
+.profile-details-modal {
+  background-color: rgba(0, 0, 0, 0.8);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  inset: 0;
+}
+
+.profile-details-modal .profile-details-container {
+  background-color: var(--blue);
+  color: #fff;
+
+  width: 30rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

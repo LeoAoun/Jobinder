@@ -6,6 +6,17 @@
 
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.chat-container .no-matches {
+  color: #fff;
+  font-weight: 600;
+  font-size: 2rem;
+
+  padding: 0rem 1rem 5rem;
+  margin: auto auto;
+  text-align: center;
 }
 
 .chat-container .chat-header {
@@ -77,7 +88,7 @@
   font-size: 0.8rem;
 }
 
-.chat-container .chat-box .delete-chat {
+.chat-container .chat-box .delete-match {
   cursor: pointer;
   color: var(--red);
   font-weight: 600;
