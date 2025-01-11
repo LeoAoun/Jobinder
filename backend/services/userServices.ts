@@ -1,8 +1,11 @@
-import { User, UserDTO } from "../interfaces/User";
+import { User, UserDTO } from "../../interfaces/User";
+
+// Storage key for users
+const jobinderUsersStorageKey = "jobinder-users";
 
 // Get users from database
 const getUsers = async (): Promise<Record<string, User>> => {
-  const users = localStorage.getItem("jobinder-users");
+  const users = localStorage.getItem(jobinderUsersStorageKey);
   return users ? JSON.parse(users) : {};
 };
 
@@ -24,14 +27,14 @@ const getUserDTO = async (id: string): Promise<UserDTO> => {
 
 // Create a list of users in the database
 const createUsers = async (users: Record<string, User>) => {
-  localStorage.setItem("jobinder-users", JSON.stringify(users));
+  localStorage.setItem(jobinderUsersStorageKey, JSON.stringify(users));
 };
 
 // Create a new user in the database
 const createUser = async (user: User) => {
   const users = await getUsers();
   const newUsers = { ...users, [user.phone]: user };
-  localStorage.setItem("jobinder-users", JSON.stringify(newUsers));
+  localStorage.setItem(jobinderUsersStorageKey, JSON.stringify(newUsers));
 };
 
 // Create a list of usersDTO

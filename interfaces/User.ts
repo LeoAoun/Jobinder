@@ -22,6 +22,7 @@ interface UserDTO {
   serviceProfile?: {
     serviceImg: string;
     servicesPerformed: number;
+    rating: number;
     specialty: string;
     availability: string;
     description: string;

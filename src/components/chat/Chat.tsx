@@ -1,9 +1,12 @@
 import "../../styles/components/chat/Chat.css";
 import { useEffect, useState } from "react";
 
+import ChatHeader from "./ChatHeader";
+import ChatBox from "./ChatBox";
+import PrivateChat from "./private-chat/PrivateChat";
 import DeleteMatchModal from "./DeleteMatchModal";
 
-import { UserDTO } from "../../interfaces/User";
+import { UserDTO } from "../../../interfaces/User";
 import { useAuth } from "../../contexts/AuthContext";
 import { useMatches } from "../../contexts/MatchesContext";
 
@@ -14,10 +17,16 @@ export default function Chat() {
   const { loggedUserId } = useAuth();
   const { matches } = useMatches();
 
-  const [usersMatchedDTO, setUsersMatchedDTO] = useState<UserDTO[]>([]);
+  const [usersMatchedDTO, setUsersMatchedDTO] = useState<UserDTO[] | []>([]);
+
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const [privateChatUser, setPrivateChatUser] = useState<UserDTO | null>(null);
+
   const [openDeleteMatchModal, setOpenDeleteMatchModal] = useState<boolean>(false);
   const [userMatchedToBeDeleted, setUserMatchedToBeDeleted] = useState<UserDTO | null>(null);
 
+  // Fetch users matched DTO from the database
   useEffect(() => {
     const fetchUsersMatchedDTO = async () => {
       const matchIds = await getMatch(loggedUserId);
@@ -34,46 +43,32 @@ export default function Chat() {
     };
 
     fetchUsersMatchedDTO();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matches]);
 
-  const handleDeleteMatch = (userDTO: UserDTO) => {
-    setUserMatchedToBeDeleted(userDTO);
-    setOpenDeleteMatchModal(true);
-  };
+  const filteredUsers = usersMatchedDTO.filter((userSearched) => {
+    const fullName = `${userSearched.fullName.toLowerCase()}`;
+    return fullName.includes(searchTerm.toLowerCase());
+  });
 
   return (
     <>
       <div className="chat-container">
-        <div className="chat-header">
-          <h2>Mensagens</h2>
-          <input type="text" placeholder="Localizar Contato" />
-          <button>Fechar</button>
-        </div>
-        {usersMatchedDTO.length > 0 ? (
-          <ul className="chat-list">
-            {usersMatchedDTO.map((userDTO: UserDTO, index: number) => {
-              const splitName = userDTO.fullName.split(" ");
-              const firstName = splitName[0];
-              const lastName = splitName[splitName.length - 1];
+        <ChatHeader searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-              return (
-                <li key={index} className="chat-box">
-                  <div className="chat-box-info">
-                    <img className="img" src={userDTO.serviceProfile?.serviceImg} />
-                    <div className="name-and-last-message">
-                      <span className="name">{`${firstName} ${lastName}`}</span>
-                      <span className="last-message">aaa</span>
-                    </div>
-                  </div>
-                  <button className="delete-match" onClick={() => handleDeleteMatch(userDTO)}>
-                    X
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+        {!privateChatUser ? (
+          filteredUsers.length > 0 ? (
+            <ChatBox
+              filteredUsers={filteredUsers}
+              setUserMatchedToBeDeleted={setUserMatchedToBeDeleted}
+              setOpenDeleteMatchModal={setOpenDeleteMatchModal}
+              setPrivateChatUser={setPrivateChatUser}
+            />
+          ) : (
+            <span className="no-matches">Nenhum match realizado.</span>
+          )
         ) : (
-          <span className="no-matches">Nenhum match realizado.</span>
+          <PrivateChat privateChatUser={privateChatUser} setPrivateChatUser={setPrivateChatUser} />
         )}
       </div>
 

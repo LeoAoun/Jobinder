@@ -1,15 +1,12 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
-// Define o tipo do contexto
 interface MatchesContextType {
   matches: Record<string, string[]>;
   setMatches: React.Dispatch<React.SetStateAction<Record<string, string[]>>>;
 }
 
-// Inicializa o contexto
 const MatchContext = createContext<MatchesContextType | undefined>(undefined);
 
-// Componente Provider
 export const MatchesProvider = ({ children }: { children: ReactNode }) => {
   const [matches, setMatches] = useState<Record<string, string[]>>({});
 
@@ -20,7 +17,7 @@ export const MatchesProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Hook para usar o contexto
+// eslint-disable-next-line react-refresh/only-export-components
 export const useMatches = () => {
   const context = useContext(MatchContext);
   if (!context) {

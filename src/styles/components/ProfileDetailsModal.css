@@ -14,8 +14,78 @@
   color: #fff;
 
   width: 30rem;
+  border-radius: 1rem;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  position: relative;
+}
+
+.profile-details-modal .profile-details-container .rating-container {
+  background-color: var(--blue);
+
+  border-radius: 1rem 0;
+  padding: 0.5rem;
+
+  position: absolute;
+  top: 0;
+}
+
+.profile-details-modal .profile-details-container .rating-container .rating {
+  font-size: 2rem;
+}
+
+.profile-details-modal .profile-details-container .rating-container .rating-active {
+  color: gold;
+}
+
+.profile-details-modal .profile-details-container .close-profile-details {
+  cursor: pointer;
+  background-color: var(--red);
+  color: #fff;
+  font-size: 1rem;
+
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--darkRed);
+  }
+}
+
+.profile-details-modal .profile-details-container > img {
+  width: 100%;
+  height: 17rem;
+  object-fit: cover;
+
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.profile-details-modal .profile-details-container .profile-details {
+  text-align: justify;
+  padding: 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-details-modal .profile-details-container .profile-details > div span {
+  &:first-child {
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  &:last-child {
+    margin-left: 0.4rem;
+  }
 }

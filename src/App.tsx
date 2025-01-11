@@ -7,15 +7,17 @@ import Chat from "./components/chat/Chat";
 import { User } from "./interfaces/User";
 import { useUsers } from "./contexts/UsersContext";
 import { useUsersDTO } from "./contexts/UsersDTOContext";
+import { useProfileDetails } from "./contexts/ProfileDetailsContext";
 
 import { getUsers, createUsersDTO } from "../backend/services/userServices";
 import { createFakeUsers } from "../backend/fake-users/generateFakeUsers";
 
-import ProfileDetailsModal from "./components/ProfileDetailsModal";
+import ProfileDetailsModal from "./components/profile-details/ProfileDetailsModal";
 
 const App = () => {
   const { setUsers } = useUsers();
   const { setUsersDTO } = useUsersDTO();
+  const { profileDetails } = useProfileDetails();
 
   const fetchFakeUsers = async () => {
     const fakeUsers: Record<string, User> = await createFakeUsers();
@@ -44,7 +46,7 @@ const App = () => {
         <Cards />
       </div>
       <Chat />
-      <ProfileDetailsModal />
+      {profileDetails ? <ProfileDetailsModal /> : null}
     </div>
   );
 };

@@ -1,10 +1,14 @@
+import App from "./App.tsx";
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { MatchesProvider } from "./contexts/MatchesContext.tsx";
+
+import { AuthProvider } from "./contexts/AuthContext.tsx";
 import { UsersProvider } from "./contexts/UsersContext.tsx";
 import { UsersDTOProvider } from "./contexts/UsersDTOContext.tsx";
-import App from "./App.tsx";
-import { AuthProvider } from "./contexts/AuthContext.tsx";
+import { MatchesProvider } from "./contexts/MatchesContext.tsx";
+import { ProfileDetailsProvider } from "./contexts/ProfileDetailsContext.tsx";
+import { ChatMessagesProvider } from "./contexts/ChatMessagesContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -12,7 +16,11 @@ createRoot(document.getElementById("root")!).render(
       <UsersProvider>
         <UsersDTOProvider>
           <MatchesProvider>
-            <App />
+            <ProfileDetailsProvider>
+              <ChatMessagesProvider>
+                <App />
+              </ChatMessagesProvider>
+            </ProfileDetailsProvider>
           </MatchesProvider>
         </UsersDTOProvider>
       </UsersProvider>

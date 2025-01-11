@@ -1,6 +1,6 @@
 import "../../styles/components/chat/DeleteMatchModal.css";
 
-import { UserDTO } from "../../interfaces/User";
+import { UserDTO } from "../../../interfaces/User";
 import { useAuth } from "../../contexts/AuthContext";
 
 import { deleteMatch } from "../../../backend/services/matchServices";
