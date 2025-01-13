@@ -1,4 +1,4 @@
-import { UserDTO } from "../../../interfaces/User";
+import { UserDTO } from "@interfaces/User";
 
 interface CardButtonsProps {
   handleSwipe: (direction: string, profile: UserDTO) => void;

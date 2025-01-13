@@ -1,10 +1,10 @@
-import "../../styles/components/chat/DeleteMatchModal.css";
+import "@styles/components/chat/DeleteMatchModal.css";
 
-import { UserDTO } from "../../../interfaces/User";
-import { useAuth } from "../../contexts/AuthContext";
+import { UserDTO } from "@interfaces/User";
+import { useAuth } from "@contexts/AuthContext";
+import { useMatches } from "@contexts/MatchesContext";
 
-import { deleteMatch } from "../../../backend/services/matchServices";
-import { useMatches } from "../../contexts/MatchesContext";
+import { deleteMatch } from "@services/matchServices";
 
 interface DeleteMatchModalProps {
   setOpenDeleteMatchModel: React.Dispatch<React.SetStateAction<boolean>>;

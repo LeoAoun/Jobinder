@@ -1,5 +1,5 @@
-import { ChatMessages } from "../../../../interfaces/Chat";
-import { useAuth } from "../../../contexts/AuthContext";
+import { ChatMessages } from "@interfaces/Chat";
+import { useAuth } from "@contexts/AuthContext";
 
 interface ChatMessagesProps {
   chatContainerRef: React.RefObject<HTMLDivElement>;

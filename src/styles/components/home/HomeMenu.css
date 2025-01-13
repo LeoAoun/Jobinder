@@ -1,0 +1,118 @@
+.menu-container {
+  width: 100vw;
+  padding: 1rem 0;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.menu-container .logo {
+  width: 10rem;
+}
+
+.menu-container .menu-not-logged {
+  gap: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.menu-container .menu-not-logged .link {
+  text-decoration: none;
+}
+
+.menu-container .menu-not-logged .link span {
+  color: #fff;
+  font-size: 1.1rem;
+  text-decoration: none;
+  position: relative;
+
+  &:hover::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+  }
+}
+
+.menu-container .menu-logged {
+  color: #fff;
+  font-size: 1.1rem;
+  gap: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.menu-container .menu-logged .create-service-profile {
+  color: #fff;
+  font-size: 1.1rem;
+  text-decoration: none;
+
+  position: relative;
+
+  &:hover::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+  }
+}
+
+.menu-container .menu-logged .service-profile {
+  color: #fff;
+  font-size: 1.1rem;
+  text-decoration: none;
+  position: relative;
+
+  position: relative;
+
+  &:hover::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+  }
+}
+
+.menu-container .menu-logged .exit-login {
+  cursor: pointer;
+  font-size: 1.2rem;
+
+  position: relative;
+
+  &:hover::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+  }
+}
+
+.menu-container .menu-logged .menu-logged-user {
+  user-select: none;
+  background-color: var(--blue);
+
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  gap: 0.5rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menu-container .menu-logged .menu-logged-user-img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}

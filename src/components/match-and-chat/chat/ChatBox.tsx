@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { UserDTO } from "../../../interfaces/User";
-import { useAuth } from "../../contexts/AuthContext";
+import { UserDTO } from "@interfaces/User";
+import { useAuth } from "@contexts/AuthContext";
 
-import { getLastMessagePrivateChat } from "../../../backend/services/chatServices";
+import { getLastMessagePrivateChat } from "../../../../backend/services/chatServices";
 
 interface ChatBoxProps {
   filteredUsers: UserDTO[];

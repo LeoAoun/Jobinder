@@ -1,16 +1,16 @@
-import "../../../styles/components/chat/PrivateChat.css";
+import "@styles/components/chat/PrivateChat.css";
 import { useEffect, useRef } from "react";
 
 import PrivateChatHeader from "./PrivateChatHeader";
 import PrivateChatMessagesContainer from "./PrivateChatMessagesContainer";
 import PrivateChatInputContainer from "./PrivateChatInputContainer";
 
-import { UserDTO } from "../../../../interfaces/User";
-import { ChatMessages } from "../../../../interfaces/Chat";
-import { useAuth } from "../../../contexts/AuthContext";
-import { useChatMessages } from "../../../contexts/ChatMessagesContext";
+import { UserDTO } from "@interfaces/User";
+import { ChatMessages } from "@interfaces/Chat";
+import { useAuth } from "@contexts/AuthContext";
+import { useChatMessages } from "@contexts/ChatMessagesContext";
 
-import { getChatMessages } from "../../../../backend/services/chatServices";
+import { getChatMessages } from "@services/chatServices";
 
 interface ChatMessagesProps {
   privateChatUser: UserDTO | null;

@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 
-import { UserDTO } from "../../../../interfaces/User";
-import { ChatMessages } from "../../../../interfaces/Chat";
-import { useAuth } from "../../../contexts/AuthContext";
-import { useChatMessages } from "../../../contexts/ChatMessagesContext";
+import { UserDTO } from "@interfaces/User";
+import { ChatMessages } from "@interfaces/Chat";
+import { useAuth } from "@contexts/AuthContext";
+import { useChatMessages } from "@contexts/ChatMessagesContext";
 
-import { addChatMessage, getChatMessages } from "../../../../backend/services/chatServices";
+import { addChatMessage, getChatMessages } from "@services/chatServices";
 
 interface PrivateChatInputContainerProps {
   privateChatUser: UserDTO | null;

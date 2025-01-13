@@ -1,0 +1,116 @@
+.choose-category-container {
+  background-color: var(--blue);
+
+  width: 100%;
+  gap: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: none;
+}
+
+.choose-category-container .logo {
+  margin-top: 2rem;
+}
+
+.choose-category-container .categories-container {
+  gap: 5rem;
+  row-gap: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.choose-category-container .categories-container .category {
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+
+  width: 12rem;
+  height: 12rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translate(0, -0.5rem);
+  }
+
+  &:hover > img {
+    transform: scale(1.05);
+  }
+
+  &:hover span {
+    opacity: 1;
+  }
+
+  &:active {
+    transform: translate(0, 0);
+  }
+}
+
+.choose-category-container .categories-container .category > span {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.choose-category-container .categories-container .category .category-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.choose-category-container .categories-container .category-active::after {
+  content: url("@assets/check.png");
+  background-color: #002517cc;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+}
+
+.choose-category-container .categories-container .category .category-image img {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transition: all 0.2s;
+}
+
+.choose-category-container .choose-category {
+  cursor: pointer;
+  background-color: var(--lightGreen);
+  color: var(--darkGreen);
+  font-weight: 700;
+  font-size: 1.3rem;
+
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin: 2rem 0;
+  border: none;
+
+  transition: all 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

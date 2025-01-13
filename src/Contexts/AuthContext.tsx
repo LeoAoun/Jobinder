@@ -26,6 +26,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     if (loggedUserId !== "-1") {
       localStorage.setItem("loggedUserId", loggedUserId);
+    } else {
+      localStorage.removeItem("loggedUserId");
     }
   }, [loggedUserId]);
 

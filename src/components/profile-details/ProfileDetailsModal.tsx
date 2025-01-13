@@ -1,7 +1,8 @@
-import "../../styles/components/ProfileDetailsModal.css";
+import "@styles/components/ProfileDetailsModal.css";
+
 import ProfileDetailsRating from "./ProfileDetailsRating";
 
-import { useProfileDetails } from "../../contexts/ProfileDetailsContext";
+import { useProfileDetails } from "@contexts/ProfileDetailsContext";
 
 export default function ProfileDetailsModal() {
   const { profileDetails, setProfileDetails } = useProfileDetails();

@@ -20,7 +20,17 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "paths": {
+      "@routes": ["src/Routes.ts"],
+      "@utils/*": ["./utils/*"],
+      "@assets/*": ["./assets/*"],
+      "@interfaces/*": ["./interfaces/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@services/*": ["./backend/services/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "utils"]
 }

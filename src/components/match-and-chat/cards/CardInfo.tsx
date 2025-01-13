@@ -1,4 +1,4 @@
-import { UserDTO } from "../../../interfaces/User";
+import { UserDTO } from "@interfaces/User";
 
 export default function CardInfo({ profile }: { profile: UserDTO }) {
   return (

@@ -8,7 +8,9 @@ export default function ProfileDetailsRating({ rating }: ProfileDetailsRatingPro
 
   // Generate the stars dynamically
   const stars = Array.from({ length: 5 }, (_, i) => (
-    <span key={i} className={`rating ${rating > i ? 'rating-active' : ''}`}>★</span>
+    <span key={i} className={`rating ${rating > i ? "rating-active" : ""}`}>
+      ★
+    </span>
   ));
 
   return <div className="rating-container">{stars}</div>;

@@ -1,17 +1,17 @@
-import "../../styles/components/cards/Card.css";
-import CardInfo from "./CardInfo.tsx";
-import CardButtons from "./CardButtons.tsx";
-
+import "@styles/components/cards/Card.css";
 import { useEffect, useRef, useState } from "react";
 import TinderCard from "react-tinder-card";
 
-import { UserDTO } from "../../../interfaces/User.ts";
-import { useUsersDTO } from "../../contexts/UsersDTOContext.tsx";
-import { useMatches } from "../../contexts/MatchesContext.tsx";
+import CardInfo from "./CardInfo.tsx";
+import CardButtons from "./CardButtons.tsx";
 
-import { addMatch, getMatches } from "../../../backend/services/matchServices.ts";
-import { useAuth } from "../../contexts/AuthContext.tsx";
-import { useProfileDetails } from "../../contexts/ProfileDetailsContext.tsx";
+import { UserDTO } from "@interfaces/User.ts";
+import { useAuth } from "@contexts/AuthContext.tsx";
+import { useUsersDTO } from "@contexts/UsersDTOContext.tsx";
+import { useMatches } from "@contexts/MatchesContext.tsx";
+import { useProfileDetails } from "@contexts/ProfileDetailsContext.tsx";
+
+import { addMatch, getMatches } from "@services/matchServices.ts";
 
 export default function Cards() {
   const { loggedUserId } = useAuth();
@@ -48,7 +48,10 @@ export default function Cards() {
 
       // Filter the profiles that are not matched
       const notMatchedProfiles = Object.values(usersDTO).filter(
-        (profile) => !matchedIds.includes(profile.phone) && profile.phone !== loggedUserId
+        (profile) =>
+          !matchedIds.includes(profile.phone) && // The profile is not matched
+          profile.phone !== loggedUserId && // The profile is not the logged user
+          profile.serviceProfile // The profile is a service profile
       );
 
       setProfiles(notMatchedProfiles);

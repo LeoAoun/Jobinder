@@ -1,6 +1,6 @@
 import axios from "axios";
 import bcrypt from "bcryptjs-react";
-import { getCities } from "../services/location";
+import { getCities } from "../services/locationServices";
 
 import { User } from "../../interfaces/User";
 import { createUsers } from "../services/userServices";

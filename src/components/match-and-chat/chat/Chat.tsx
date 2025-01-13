@@ -1,4 +1,4 @@
-import "../../styles/components/chat/Chat.css";
+import "@styles/components/chat/Chat.css";
 import { useEffect, useState } from "react";
 
 import ChatHeader from "./ChatHeader";
@@ -6,12 +6,12 @@ import ChatBox from "./ChatBox";
 import PrivateChat from "./private-chat/PrivateChat";
 import DeleteMatchModal from "./DeleteMatchModal";
 
-import { UserDTO } from "../../../interfaces/User";
-import { useAuth } from "../../contexts/AuthContext";
-import { useMatches } from "../../contexts/MatchesContext";
+import { useAuth } from "@contexts/AuthContext";
+import { UserDTO } from "@interfaces/User";
+import { useMatches } from "@contexts/MatchesContext";
 
-import { getUserDTO } from "../../../backend/services/userServices";
-import { getMatch } from "../../../backend/services/matchServices";
+import { getUserDTO } from "@services/userServices";
+import { getMatch } from "@services/matchServices";
 
 export default function Chat() {
   const { loggedUserId } = useAuth();

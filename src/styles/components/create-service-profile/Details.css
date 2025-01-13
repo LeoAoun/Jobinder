@@ -1,0 +1,152 @@
+.create-service-profile-container {
+  background-color: var(--blue);
+
+  width: 100vw;
+  min-height: 100vh;
+  gap: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.create-service-profile-container .logo {
+  margin-top: 2rem;
+}
+
+.create-service-profile-container .create-service-profile-form {
+  background-color: #fff;
+
+  width: 25rem;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  gap: 2rem;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-service-profile-container .create-service-profile-form h1 {
+  color: var(--blue);
+  font-size: 1.9rem;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.create-service-profile-container .create-service-profile-form form {
+  width: 100%;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.create-service-profile-container .create-service-profile-form form > span {
+  background-color: var(--grey);
+  font-size: 1.1rem;
+
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+.create-service-profile-container .create-service-profile-form form label {
+  color: var(--blue);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.create-service-profile-container .create-service-profile-form form textarea {
+  resize: none;
+  background-color: var(--grey);
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  outline: none;
+}
+
+.create-service-profile-container .create-service-profile-form form input[type="text"] {
+  background-color: var(--grey);
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  outline: none;
+}
+
+.create-service-profile-container .create-service-profile-form form select {
+  cursor: pointer;
+  background-color: var(--grey);
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  outline: none;
+}
+
+.create-service-profile-container .create-service-profile-form form select option {
+  background-color: var(--grey);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.create-service-profile-container .create-service-profile-form form input[type="file"] {
+  cursor: pointer;
+  outline: none;
+  background-color: var(--grey);
+
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px dashed #ccc;
+
+  &:hover {
+    border-color: #888;
+    background-color: #f0f0f0;
+  }
+
+  &::file-selector-button {
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+}
+
+.create-service-profile-container .create-service-profile-form form button[type="submit"] {
+  cursor: pointer;
+  background-color: var(--blue);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  border: none;
+  outline: none;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--darkBlue);
+  }
+}
