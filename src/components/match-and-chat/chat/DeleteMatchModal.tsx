@@ -1,4 +1,4 @@
-import "@styles/components/chat/DeleteMatchModal.css";
+import "@styles/components/match-and-chat/chat/DeleteMatchModal.css";
 
 import { UserDTO } from "@interfaces/User";
 import { useAuth } from "@contexts/AuthContext";

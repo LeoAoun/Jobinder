@@ -12,7 +12,7 @@ import { MatchesProvider } from "@contexts/MatchesContext";
 import { ProfileDetailsProvider } from "@contexts/ProfileDetailsContext";
 import { ChatMessagesProvider } from "@contexts/ChatMessagesContext";
 
-export const toastConfig: ToastOptions = {
+const toastConfig: ToastOptions = {
   position: "bottom-right",
   autoClose: 3000,
   hideProgressBar: false,

@@ -1,4 +1,4 @@
-import "@styles/components/chat/Chat.css";
+import "@styles/components/match-and-chat/chat/Chat.css";
 import { useEffect, useState } from "react";
 
 import ChatHeader from "./ChatHeader";

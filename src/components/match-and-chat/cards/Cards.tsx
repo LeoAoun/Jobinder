@@ -1,4 +1,4 @@
-import "@styles/components/cards/Card.css";
+import "@styles/components/match-and-chat/cards/Card.css";
 import { useEffect, useRef, useState } from "react";
 import TinderCard from "react-tinder-card";
 

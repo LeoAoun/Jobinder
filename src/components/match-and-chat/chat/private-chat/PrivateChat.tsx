@@ -1,4 +1,4 @@
-import "@styles/components/chat/PrivateChat.css";
+import "@styles/components/match-and-chat/chat/PrivateChat.css";
 import { useEffect, useRef } from "react";
 
 import PrivateChatHeader from "./PrivateChatHeader";
