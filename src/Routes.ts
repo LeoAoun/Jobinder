@@ -4,6 +4,7 @@ enum ROUTES {
   Login = "/login",
   CreateServiceProfileCategories = "/create-service-profile/categories",
   CreateServiceProfileDetails = "/create-service-profile/details",
+  ServiceCategories = "/service-categories",
   MatchAndChat = "/match-and-chat",
 }
 

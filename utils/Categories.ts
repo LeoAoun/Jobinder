@@ -15,5 +15,5 @@ export const categories: string[] = [
   "Musica",
   "Personal",
   "Programador",
-  "Saude",
+  "Saúde",
 ];

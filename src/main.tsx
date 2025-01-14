@@ -1,16 +1,16 @@
-import App from "./App.tsx";
+import App from "./App";
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer, ToastOptions } from "react-toastify";
 
-import { AuthProvider } from "@contexts/AuthContext.tsx";
-import { UsersProvider } from "@contexts/UsersContext.tsx";
-import { UsersDTOProvider } from "@contexts/UsersDTOContext.tsx";
-import { MatchesProvider } from "@contexts/MatchesContext.tsx";
-import { ProfileDetailsProvider } from "@contexts/ProfileDetailsContext.tsx";
-import { ChatMessagesProvider } from "@contexts/ChatMessagesContext.tsx";
+import { AuthProvider } from "@contexts/AuthContext";
+import { UsersProvider } from "@contexts/UsersContext";
+import { UsersDTOProvider } from "@contexts/UsersDTOContext";
+import { MatchesProvider } from "@contexts/MatchesContext";
+import { ProfileDetailsProvider } from "@contexts/ProfileDetailsContext";
+import { ChatMessagesProvider } from "@contexts/ChatMessagesContext";
 
 export const toastConfig: ToastOptions = {
   position: "bottom-right",

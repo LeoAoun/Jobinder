@@ -2,14 +2,14 @@ import "@styles/components/cards/Card.css";
 import { useEffect, useRef, useState } from "react";
 import TinderCard from "react-tinder-card";
 
-import CardInfo from "./CardInfo.tsx";
-import CardButtons from "./CardButtons.tsx";
+import CardInfo from "./CardInfo";
+import CardButtons from "./CardButtons";
 
 import { UserDTO } from "@interfaces/User.ts";
-import { useAuth } from "@contexts/AuthContext.tsx";
-import { useUsersDTO } from "@contexts/UsersDTOContext.tsx";
-import { useMatches } from "@contexts/MatchesContext.tsx";
-import { useProfileDetails } from "@contexts/ProfileDetailsContext.tsx";
+import { useAuth } from "@contexts/AuthContext";
+import { useUsersDTO } from "@contexts/UsersDTOContext";
+import { useMatches } from "@contexts/MatchesContext";
+import { useProfileDetails } from "@contexts/ProfileDetailsContext";
 
 import { addMatch, getMatches } from "@services/matchServices.ts";
 

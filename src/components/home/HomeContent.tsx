@@ -15,7 +15,9 @@ export default function HomeContent() {
         </p>
       </div>
       <div className="home-content-buttons">
-        <button className="categories">Categorias de Serviço</button>
+        <Link to={ROUTES.ServiceCategories}>
+          <button className="categories">Categorias de Serviço</button>
+        </Link>
         <Link to={ROUTES.MatchAndChat}>
           <button className="hire">Contrate</button>
         </Link>

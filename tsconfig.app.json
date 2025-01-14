@@ -23,7 +23,7 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
-      "@routes": ["src/Routes.ts"],
+      "@routes": ["./src/Routes.ts"],
       "@utils/*": ["./utils/*"],
       "@assets/*": ["./assets/*"],
       "@interfaces/*": ["./interfaces/*"],

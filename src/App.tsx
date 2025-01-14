@@ -2,19 +2,22 @@ import "./styles/App.css";
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
+import ROUTES from "@routes";
+
 import Home from "./components/home/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import MatchAndChat from "./components/match-and-chat/MatchAndChat";
-
-import { User } from "../interfaces/User";
-import { useUsers } from "./contexts/UsersContext";
-import { useUsersDTO } from "./contexts/UsersDTOContext";
-
-import { getUsers, createUsersDTO } from "../backend/services/userServices";
-import { createFakeUsers } from "../backend/fake-users/generateFakeUsers";
 import ChooseCategory from "./components/create-service-profile/ChooseCategory";
 import Details from "./components/create-service-profile/Details";
+import ServiceCategories from "./components/home/service-categories/ServiceCategories";
+import MatchAndChat from "./components/match-and-chat/MatchAndChat";
+
+import { User } from "@interfaces/User";
+import { useUsers } from "@contexts/UsersContext";
+import { useUsersDTO } from "@contexts/UsersDTOContext";
+
+import { getUsers, createUsersDTO } from "@services/userServices";
+import { createFakeUsers } from "../backend/fake-users/generateFakeUsers";
 
 const App = () => {
   const { setUsers } = useUsers();
@@ -48,15 +51,16 @@ const App = () => {
   return (
     <div className="app">
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path={ROUTES.Home} element={<Home />} />
+        <Route path={ROUTES.Register} element={<Register />} />
+        <Route path={ROUTES.Login} element={<Login />} />
         <Route path="/create-service-profile">
-          <Route path="categories" element={<ChooseCategory />} />
-          <Route path="details" element={<Details />} />
+          <Route path={ROUTES.CreateServiceProfileCategories} element={<ChooseCategory />} />
+          <Route path={ROUTES.CreateServiceProfileDetails} element={<Details />} />
         </Route>
-        <Route path="match-and-chat" element={<MatchAndChat />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path={ROUTES.ServiceCategories} element={<ServiceCategories />} />
+        <Route path={ROUTES.MatchAndChat} element={<MatchAndChat />} />
+        <Route path="*" element={<Navigate to={ROUTES.Home} replace />} />
       </Routes>
     </div>
   );

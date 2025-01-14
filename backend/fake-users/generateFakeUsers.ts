@@ -60,7 +60,7 @@ const specialtiesList = [
   "Personal", // 26 - 28
   "Pintor", // 29 - 30
   "Desenvolvedor de Software", // 31 - 36
-  "Saude", // 37 - 39
+  "Saúde", // 37 - 39
 ];
 
 const availabilityList = [
