@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { User } from "../../interfaces/User";
+import { User } from "../../interfaces/IUser";
 
 interface UsersContextType {
   users: Record<string, User>;

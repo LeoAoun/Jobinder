@@ -12,7 +12,7 @@ import Details from "./components/create-service-profile/Details";
 import ServiceCategories from "./components/home/service-categories/ServiceCategories";
 import MatchAndChat from "./components/match-and-chat/MatchAndChat";
 
-import { User } from "@interfaces/User";
+import { IUser } from "@interfaces/IUser";
 import { useUsers } from "@contexts/UsersContext";
 import { useUsersDTO } from "@contexts/UsersDTOContext";
 
@@ -25,7 +25,7 @@ const App = () => {
 
   // Fetch fake users if there are no users in the database
   const fetchFakeUsers = async () => {
-    const fakeUsers: Record<string, User> = await createFakeUsers();
+    const fakeUsers: Record<string, IUser> = await createFakeUsers();
     setUsers(fakeUsers);
     setUsersDTO(createUsersDTO(fakeUsers));
   };

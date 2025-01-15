@@ -1,8 +1,8 @@
-import { UserDTO } from "@interfaces/User";
+import { IUserDTO } from "@interfaces/IUser";
 
 interface PrivateChatHeaderProps {
-  privateChatUser: UserDTO | null;
-  setPrivateChatUser: React.Dispatch<React.SetStateAction<UserDTO | null>>;
+  privateChatUser: IUserDTO | null;
+  setPrivateChatUser: React.Dispatch<React.SetStateAction<IUserDTO | null>>;
 }
 
 export default function PrivateChatHeader({

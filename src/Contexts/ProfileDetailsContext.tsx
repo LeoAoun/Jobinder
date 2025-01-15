@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { UserDTO } from "../../interfaces/User";
+import { UserDTO } from "../../interfaces/IUser";
 
 interface ProfileDetailsContextType {
   profileDetails: UserDTO | null;

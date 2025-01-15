@@ -6,8 +6,8 @@ import ChatBox from "./ChatBox";
 import PrivateChat from "./private-chat/PrivateChat";
 import DeleteMatchModal from "./DeleteMatchModal";
 
+import { IUserDTO } from "@interfaces/IUser";
 import { useAuth } from "@contexts/AuthContext";
-import { UserDTO } from "@interfaces/User";
 import { useMatches } from "@contexts/MatchesContext";
 
 import { getUserDTO } from "@services/userServices";
@@ -17,14 +17,14 @@ export default function Chat() {
   const { loggedUserId } = useAuth();
   const { matches } = useMatches();
 
-  const [usersMatchedDTO, setUsersMatchedDTO] = useState<UserDTO[] | []>([]);
+  const [usersMatchedDTO, setUsersMatchedDTO] = useState<IUserDTO[] | []>([]);
 
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const [privateChatUser, setPrivateChatUser] = useState<UserDTO | null>(null);
+  const [privateChatUser, setPrivateChatUser] = useState<IUserDTO | null>(null);
 
   const [openDeleteMatchModal, setOpenDeleteMatchModal] = useState<boolean>(false);
-  const [userMatchedToBeDeleted, setUserMatchedToBeDeleted] = useState<UserDTO | null>(null);
+  const [userMatchedToBeDeleted, setUserMatchedToBeDeleted] = useState<IUserDTO | null>(null);
 
   // Fetch users matched DTO from the database
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Chat() {
       const matchIds = await getMatch(loggedUserId);
       if (matchIds) {
         const fetchedUsers = await Promise.all(
-          matchIds.map(async (matchId) => {
+          matchIds.map(async (matchId: string) => {
             const userDTO = await getUserDTO(matchId);
             return userDTO;
           })

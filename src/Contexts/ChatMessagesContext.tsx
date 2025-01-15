@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { ChatMessages } from "../../interfaces/Chat";
+import { ChatMessages } from "../../interfaces/IChat";
 
 interface ChatMessagesContextType {
   chatMessages: ChatMessages | null;

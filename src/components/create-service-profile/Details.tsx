@@ -7,7 +7,7 @@ import logo from "@assets/logo.png";
 import ROUTES from "../../Routes";
 
 import { useAuth } from "@contexts/AuthContext";
-import { User, UserDTO } from "@interfaces/User";
+import { IServiceProfile, IUser, IUserDTO } from "@interfaces/IUser";
 
 import { getStates, getCities } from "@services/locationServices";
 import { getUser, updateUserServiceProfile, convertImageToBase64, getUserDTO } from "@services/userServices";
@@ -17,7 +17,7 @@ export default function Details() {
 
   const { loggedUserId } = useAuth();
 
-  const [loggedUserDTO, setLoggedUserDTO] = useState<UserDTO | null>(null);
+  const [loggedUserDTO, setLoggedUserDTO] = useState<IUserDTO | null>(null);
 
   const [states, setStates] = useState<{ sigla: string; nome: string }[]>([]);
   const [cities, setCities] = useState<string[]>([]);
@@ -31,7 +31,7 @@ export default function Details() {
   // Fetch logged user DTO when component mounts
   useEffect(() => {
     const fetchLoggedUser = async () => {
-      const user: UserDTO | null = await getUserDTO(loggedUserId);
+      const user: IUserDTO | null = await getUserDTO(loggedUserId);
 
       if (!user) {
         navigate(ROUTES.Home);
@@ -85,7 +85,7 @@ export default function Details() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const user: User | null = await getUser(loggedUserId);
+    const user: IUser | null = await getUser(loggedUserId);
 
     if (!user) {
       toast.error("Usuário não encontrado");
@@ -129,7 +129,7 @@ export default function Details() {
 
     const imgBase64 = await convertImageToBase64(serviceImg);
 
-    const serviceProfile = {
+    const serviceProfile: IServiceProfile = {
       specialty: user.serviceProfile.specialty,
       servicesPerformed: 0,
       rating: 0,

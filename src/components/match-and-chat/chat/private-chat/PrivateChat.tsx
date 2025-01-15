@@ -5,16 +5,16 @@ import PrivateChatHeader from "./PrivateChatHeader";
 import PrivateChatMessagesContainer from "./PrivateChatMessagesContainer";
 import PrivateChatInputContainer from "./PrivateChatInputContainer";
 
-import { UserDTO } from "@interfaces/User";
-import { ChatMessages } from "@interfaces/Chat";
+import { IUserDTO } from "@interfaces/IUser";
+import { IChatMessages } from "@interfaces/IChat";
 import { useAuth } from "@contexts/AuthContext";
 import { useChatMessages } from "@contexts/ChatMessagesContext";
 
 import { getChatMessages } from "@services/chatServices";
 
 interface ChatMessagesProps {
-  privateChatUser: UserDTO | null;
-  setPrivateChatUser: React.Dispatch<React.SetStateAction<UserDTO | null>>;
+  privateChatUser: IUserDTO | null;
+  setPrivateChatUser: React.Dispatch<React.SetStateAction<IUserDTO | null>>;
 }
 
 export default function PrivateChat({ privateChatUser, setPrivateChatUser }: ChatMessagesProps) {
@@ -28,7 +28,7 @@ export default function PrivateChat({ privateChatUser, setPrivateChatUser }: Cha
     const fetchChatMessages = async () => {
       if (!privateChatUser) return;
 
-      const chatMessages: ChatMessages = await getChatMessages(
+      const chatMessages: IChatMessages = await getChatMessages(
         loggedUserId,
         privateChatUser?.phone
       );

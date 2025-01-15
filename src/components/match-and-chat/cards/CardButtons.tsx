@@ -1,11 +1,11 @@
-import { UserDTO } from "@interfaces/User";
+import { IUserDTO } from "@interfaces/IUser";
 
 interface CardButtonsProps {
-  handleSwipe: (direction: string, profile: UserDTO) => void;
-  profile: UserDTO;
-  removedProfiles: UserDTO[];
-  setRemovedProfiles: React.Dispatch<React.SetStateAction<UserDTO[]>>;
-  setProfiles: React.Dispatch<React.SetStateAction<UserDTO[]>>;
+  handleSwipe: (direction: string, profile: IUserDTO) => void;
+  profile: IUserDTO;
+  removedProfiles: IUserDTO[];
+  setRemovedProfiles: React.Dispatch<React.SetStateAction<IUserDTO[]>>;
+  setProfiles: React.Dispatch<React.SetStateAction<IUserDTO[]>>;
 }
 
 export default function CardButtons({

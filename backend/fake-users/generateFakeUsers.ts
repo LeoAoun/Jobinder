@@ -2,7 +2,7 @@ import axios from "axios";
 import bcrypt from "bcryptjs-react";
 import { getCities } from "../services/locationServices";
 
-import { User } from "../../interfaces/User";
+import { User } from "../../interfaces/IUser";
 import { createUsers } from "../services/userServices";
 
 const imgs = [

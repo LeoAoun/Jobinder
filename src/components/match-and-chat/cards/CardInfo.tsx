@@ -1,6 +1,6 @@
-import { UserDTO } from "@interfaces/User";
+import { IUserDTO } from "@interfaces/IUser";
 
-export default function CardInfo({ profile }: { profile: UserDTO }) {
+export default function CardInfo({ profile }: { profile: IUserDTO }) {
   return (
     <>
       <span className="location">

@@ -1,14 +1,14 @@
 import { useRef, useState } from "react";
 
-import { UserDTO } from "@interfaces/User";
-import { ChatMessages } from "@interfaces/Chat";
+import { IUserDTO } from "@interfaces/IUser";
+import { IChatMessages } from "@interfaces/IChat";
 import { useAuth } from "@contexts/AuthContext";
 import { useChatMessages } from "@contexts/ChatMessagesContext";
 
 import { addChatMessage, getChatMessages } from "@services/chatServices";
 
 interface PrivateChatInputContainerProps {
-  privateChatUser: UserDTO | null;
+  privateChatUser: IUserDTO | null;
 }
 
 export default function PrivateChatInputContainer({
@@ -26,7 +26,7 @@ export default function PrivateChatInputContainer({
 
     await addChatMessage(loggedUserId, privateChatUser.phone, message);
 
-    const updatedMessages: ChatMessages = await getChatMessages(
+    const updatedMessages: IChatMessages = await getChatMessages(
       loggedUserId,
       privateChatUser.phone
     );

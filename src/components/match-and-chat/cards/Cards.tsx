@@ -5,7 +5,7 @@ import TinderCard from "react-tinder-card";
 import CardInfo from "./CardInfo";
 import CardButtons from "./CardButtons";
 
-import { UserDTO } from "@interfaces/User.ts";
+import { IUserDTO } from "@interfaces/IUser.ts";
 import { useAuth } from "@contexts/AuthContext";
 import { useUsersDTO } from "@contexts/UsersDTOContext";
 import { useMatches } from "@contexts/MatchesContext";
@@ -20,8 +20,8 @@ export default function Cards() {
   const { matches, setMatches } = useMatches();
   const { setProfileDetails } = useProfileDetails();
 
-  const [profiles, setProfiles] = useState<UserDTO[]>([]);
-  const [removedProfiles, setRemovedProfiles] = useState<UserDTO[]>([]);
+  const [profiles, setProfiles] = useState<IUserDTO[]>([]);
+  const [removedProfiles, setRemovedProfiles] = useState<IUserDTO[]>([]);
 
   const holdTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isDraggingRef = useRef(false);
@@ -59,7 +59,7 @@ export default function Cards() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usersDTO, loggedUserId]);
 
-  const handleSwipe = (direction: string, profile: UserDTO): void => {
+  const handleSwipe = (direction: string, profile: IUserDTO): void => {
     switch (direction) {
       case "left":
         setRemovedProfiles((prev) => [profile, ...prev]);
@@ -77,11 +77,11 @@ export default function Cards() {
     setProfiles((prev) => prev.filter((p) => p.phone !== profile.phone));
   };
 
-  const handleUserDetails = (profile: UserDTO) => {
+  const handleUserDetails = (profile: IUserDTO) => {
     setProfileDetails(profile);
   };
 
-  const handlePointerDown = (profile: UserDTO) => {
+  const handlePointerDown = (profile: IUserDTO) => {
     isDraggingRef.current = false;
     hasMovedRef.current = false;
 

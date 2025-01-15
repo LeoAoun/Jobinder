@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { UserDTO } from "@interfaces/User";
+import { IUserDTO } from "@interfaces/IUser";
 import { useAuth } from "@contexts/AuthContext";
 
 import { getLastMessagePrivateChat } from "../../../../backend/services/chatServices";
 
 interface ChatBoxProps {
-  filteredUsers: UserDTO[];
-  setPrivateChatUser: React.Dispatch<React.SetStateAction<UserDTO | null>>;
-  setUserMatchedToBeDeleted: React.Dispatch<React.SetStateAction<UserDTO | null>>;
+  filteredUsers: IUserDTO[];
+  setPrivateChatUser: React.Dispatch<React.SetStateAction<IUserDTO | null>>;
+  setUserMatchedToBeDeleted: React.Dispatch<React.SetStateAction<IUserDTO | null>>;
   setOpenDeleteMatchModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -39,12 +39,12 @@ export default function ChatBox({
     fetchLastMessages();
   }, [filteredUsers, loggedUserId]);
 
-  const handleDeleteMatch = (userDTO: UserDTO) => {
+  const handleDeleteMatch = (userDTO: IUserDTO) => {
     setUserMatchedToBeDeleted(userDTO);
     setOpenDeleteMatchModal(true);
   };
 
-  const handleOpenPrivateChat = (userDTO: UserDTO) => {
+  const handleOpenPrivateChat = (userDTO: IUserDTO) => {
     setPrivateChatUser(userDTO);
   };
 

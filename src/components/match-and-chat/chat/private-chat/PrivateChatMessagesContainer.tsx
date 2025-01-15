@@ -1,9 +1,9 @@
-import { ChatMessages } from "@interfaces/Chat";
+import { IChatMessages } from "@interfaces/IChat";
 import { useAuth } from "@contexts/AuthContext";
 
 interface ChatMessagesProps {
   chatContainerRef: React.RefObject<HTMLDivElement>;
-  chatMessages: ChatMessages | null;
+  chatMessages: IChatMessages | null;
 }
 
 export default function PrivateChatMessagesContainer({

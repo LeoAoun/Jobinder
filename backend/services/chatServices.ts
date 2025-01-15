@@ -1,11 +1,11 @@
-import { Message, ChatMessages, Chats } from "../../interfaces/Chat";
+import { IMessage, IChatMessages, IChats } from "../../interfaces/IChat";
 import { v4 as uuidv4 } from "uuid";
 
 // Storage key for chats
 const jobinderChatsStorageKey = "jobinder-chats";
 
 // Get the chat messages from the database
-const getChats = async (): Promise<Chats> => {
+const getChats = async (): Promise<IChats> => {
   const chats = JSON.parse(localStorage.getItem(jobinderChatsStorageKey) || "{}");
   return chats;
 };
@@ -17,7 +17,7 @@ const getPrivateChatStorageKey = async (loggedUserId: string, chatUserId: string
 };
 
 // Get the chat messages from a private chat
-const getChatMessages = async (loggedUserId: string, chatUserId: string): Promise<ChatMessages> => {
+const getChatMessages = async (loggedUserId: string, chatUserId: string): Promise<IChatMessages> => {
   const chats = await getChats();
   const privateChatStorageKey = await getPrivateChatStorageKey(loggedUserId, chatUserId);
   return chats[privateChatStorageKey] || [];
@@ -28,7 +28,7 @@ const addChatMessage = async (loggedUserId: string, chatUserId: string, message:
   const chats = await getChats();
   const privateChatStorageKey = await getPrivateChatStorageKey(loggedUserId, chatUserId);
 
-  const newMessage: Message = {
+  const newMessage: IMessage = {
     id: uuidv4(),
     senderId: loggedUserId,
     receiverId: chatUserId,
@@ -36,7 +36,7 @@ const addChatMessage = async (loggedUserId: string, chatUserId: string, message:
     date: new Date(),
   };
 
-  const updatedMessages: Message[] = Array.isArray(chats[privateChatStorageKey])
+  const updatedMessages: IMessage[] = Array.isArray(chats[privateChatStorageKey])
     ? chats[privateChatStorageKey]
     : [];
   updatedMessages.push(newMessage);
@@ -50,8 +50,8 @@ const addChatMessage = async (loggedUserId: string, chatUserId: string, message:
 const getLastMessagePrivateChat = async (
   loggedUserId: string,
   chatUserId: string
-): Promise<Message | null> => {
-  const chatMessages: ChatMessages = await getChatMessages(loggedUserId, chatUserId);
+): Promise<IMessage | null> => {
+  const chatMessages: IChatMessages = await getChatMessages(loggedUserId, chatUserId);
 
   if (Array.isArray(chatMessages) && chatMessages.length > 0) {
     return chatMessages[chatMessages.length - 1];

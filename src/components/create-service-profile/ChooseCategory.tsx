@@ -7,7 +7,7 @@ import logo from "@assets/logo.png";
 import ROUTES from "@routes";
 import Category from "./Category";
 
-import { ServiceProfile } from "@interfaces/User";
+import { IServiceProfile } from "@interfaces/IUser";
 import { useAuth } from "@contexts/AuthContext";
 import { categories } from "@utils/Categories";
 import { updateUserServiceProfile } from "@services/userServices";
@@ -24,7 +24,7 @@ export default function ChooseCategory() {
 
   const handleSubmitChoose = () => {
     if (categoryChosen) {
-      const serviceProfile: ServiceProfile = {
+      const serviceProfile: IServiceProfile = {
         specialty: categoryChosen,
         serviceImg: "",
         servicesPerformed: 0,

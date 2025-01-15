@@ -1,6 +1,6 @@
 import "@styles/components/match-and-chat/chat/DeleteMatchModal.css";
 
-import { UserDTO } from "@interfaces/User";
+import { IUserDTO } from "@interfaces/IUser";
 import { useAuth } from "@contexts/AuthContext";
 import { useMatches } from "@contexts/MatchesContext";
 
@@ -8,9 +8,9 @@ import { deleteMatch } from "@services/matchServices";
 
 interface DeleteMatchModalProps {
   setOpenDeleteMatchModel: React.Dispatch<React.SetStateAction<boolean>>;
-  setUsersMatchedDTO: React.Dispatch<React.SetStateAction<UserDTO[]>>;
-  userMatchedToBeDeleted: UserDTO | null;
-  setUserMatchedToBeDeleted: React.Dispatch<React.SetStateAction<UserDTO | null>>;
+  setUsersMatchedDTO: React.Dispatch<React.SetStateAction<IUserDTO[]>>;
+  userMatchedToBeDeleted: IUserDTO | null;
+  setUserMatchedToBeDeleted: React.Dispatch<React.SetStateAction<IUserDTO | null>>;
 }
 
 export default function DeleteMatchModal({

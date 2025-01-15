@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import noServiceImg from "@assets/no-service-img.webp";
 
-import { UserDTO } from "@interfaces/User";
+import { IUserDTO } from "@interfaces/IUser";
 import { useAuth } from "@contexts/AuthContext";
 
 import { getUserDTO } from "@services/userServices";
@@ -11,12 +11,12 @@ import { getUserDTO } from "@services/userServices";
 export default function HomeMenuLogged() {
   const { loggedUserId, setLoggedUserId } = useAuth();
 
-  const [loggedUserDTO, setLoggedUserDTO] = useState<UserDTO | null>(null);
+  const [loggedUserDTO, setLoggedUserDTO] = useState<IUserDTO | null>(null);
 
   // Fetch logged user DTO when component mounts
   useEffect(() => {
     const fetchLoggedUser = async () => {
-      const user: UserDTO | null = await getUserDTO(loggedUserId);
+      const user: IUserDTO | null = await getUserDTO(loggedUserId);
       setLoggedUserDTO(user);
     };
 
