@@ -29,12 +29,15 @@ export default function HomeMenuLogged() {
 
   return (
     <div className="menu-logged">
-      <Link className="create-service-profile" to="/create-service-profile/categories">
-        <span>CRIAR PERFIL DE SERVIÇOS</span>
-      </Link>
-      {/*  <Link className="service-profile" to="/service-profile">
-        <span>PERFIL DE SERVIÇOS</span>
-      </Link> */}
+      {loggedUserDTO?.serviceProfile ? (
+        <Link className="service-profile" to="/service-profile">
+          <span>PERFIL DE SERVIÇOS</span>
+        </Link>
+      ) : (
+        <Link className="create-service-profile" to="/create-service-profile/categories">
+          <span>CRIAR PERFIL DE SERVIÇOS</span>
+        </Link>
+      )}
       <span className="exit-login" onClick={handleExitLogin}>
         SAIR
       </span>

@@ -11,6 +11,7 @@ import ChooseCategory from "./components/create-service-profile/ChooseCategory";
 import Details from "./components/create-service-profile/Details";
 import ServiceCategories from "./components/home/service-categories/ServiceCategories";
 import MatchAndChat from "./components/match-and-chat/MatchAndChat";
+import ServiceProfile from "./components/service-profile/ServiceProfile";
 
 import { IUser } from "@interfaces/IUser";
 import { useUsers } from "@contexts/UsersContext";
@@ -60,6 +61,7 @@ const App = () => {
         </Route>
         <Route path={ROUTES.ServiceCategories} element={<ServiceCategories />} />
         <Route path={ROUTES.MatchAndChat} element={<MatchAndChat />} />
+        <Route path={ROUTES.ServiceProfile} element={<ServiceProfile />} />
         <Route path="*" element={<Navigate to={ROUTES.Home} replace />} />
       </Routes>
     </div>

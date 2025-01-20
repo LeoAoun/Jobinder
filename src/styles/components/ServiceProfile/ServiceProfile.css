@@ -1,0 +1,7 @@
+.service-profile-container {
+  background-color: var(--grey);
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+}
