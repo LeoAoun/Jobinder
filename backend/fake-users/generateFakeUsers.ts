@@ -2,7 +2,7 @@ import axios from "axios";
 import bcrypt from "bcryptjs-react";
 import { getCities } from "../services/locationServices";
 
-import { User } from "../../interfaces/IUser";
+import { IUser } from "../../interfaces/IUser";
 import { createUsers } from "../services/userServices";
 
 const imgs = [
@@ -95,7 +95,7 @@ const getSpecialty = (index: number): string => {
 };
 
 const createFakeUsers = async () => {
-  const usersTest: Record<string, User> = {};
+  const usersTest: Record<string, IUser> = {};
 
   const users = await getRandomUsers();
   const cities = await getCities("SP");
@@ -111,7 +111,7 @@ const createFakeUsers = async () => {
     const randomAvailability =
       availabilityList[Math.floor(Math.random() * availabilityList.length)];
 
-    const userTest: User = {
+    const userTest: IUser = {
       phone,
       fullName: `${user.name.first} ${user.name.last}`,
       password: hashPassword,

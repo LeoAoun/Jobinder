@@ -73,7 +73,7 @@ const updateUserServiceProfile = async (userId: string, serviceProfile: IService
 };
 
 // Update service image in the database
-const updateServiceImage = async (user: IUser, serviceImg: File) => {
+const updateServiceImage = async (userId: string, serviceImg: File) => {
   // Parse image to base64
   const toBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -84,6 +84,10 @@ const updateServiceImage = async (user: IUser, serviceImg: File) => {
     });
 
   try {
+    const user = await getUser(userId);
+
+    if (!user) return;
+
     const serviceProfile = user.serviceProfile;
 
     if (!serviceProfile) return;

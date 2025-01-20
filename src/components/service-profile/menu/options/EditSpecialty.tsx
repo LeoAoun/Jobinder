@@ -3,37 +3,37 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import logo from "@assets/logo.png";
-import ROUTES from "@routes";
 import Category from "./Category";
 
-import { IServiceProfile } from "@interfaces/IUser";
-import { useAuth } from "@contexts/AuthContext";
+import logo from "@assets/logo.png";
+
+import ROUTES from "@routes";
 import { categories } from "@utils/Categories";
+
+import { IServiceProfile, IUserDTO } from "@interfaces/IUser";
+import { useAuth } from "@contexts/AuthContext";
+
 import { getUserDTO, updateUserServiceProfile } from "@services/userServices";
 
-export default function ChooseCategory() {
+export default function EditSpecialty() {
   const { loggedUserId } = useAuth();
+  const [loggedUserDTO, setLoggedUserDTO] = useState<IUserDTO | null>(null);
+
   const navigate = useNavigate();
 
-  const [categoryChosen, setCategoryChosen] = useState<string | null>(null);
-
-  // If logged user has already a service profile, redirect to service profile page
+  // Fetch loggedUserDTO when loggedUserId changes
   useEffect(() => {
-    const fetchLoggedUserDTO = async () => {
+    const fetchUserDTO = async () => {
       if (loggedUserId) {
         const userDTO = await getUserDTO(loggedUserId);
-
-        if (!userDTO) return;
-
-        if (userDTO.serviceProfile) {
-          navigate(ROUTES.ServiceProfile);
-        }
+        setLoggedUserDTO(userDTO);
       }
     };
 
-    fetchLoggedUserDTO();
-  }, [loggedUserId, navigate]);
+    fetchUserDTO();
+  }, [loggedUserId]);
+
+  const [categoryChosen, setCategoryChosen] = useState<string | null>(null);
 
   const handleChooseCategory = (category: string) => {
     setCategoryChosen(category);
@@ -41,20 +41,17 @@ export default function ChooseCategory() {
 
   const handleSubmitChoose = () => {
     if (categoryChosen) {
-      const serviceProfile: IServiceProfile = {
-        specialty: categoryChosen,
-        serviceImg: "",
-        servicesPerformed: 0,
-        rating: 0,
-        availability: "",
-        description: "",
-        location: { city: "", state: "" },
-      };
+      if (!loggedUserDTO) {
+        return;
+      }
+
+      const updatedServiceProfile = loggedUserDTO.serviceProfile as IServiceProfile;
+      const serviceProfile = { ...updatedServiceProfile, specialty: categoryChosen };
 
       updateUserServiceProfile(loggedUserId, serviceProfile);
 
       setTimeout(() => {
-        navigate(ROUTES.CreateServiceProfileDetails);
+        navigate(ROUTES.ServiceProfile);
       }, 3000);
 
       toast.success("Categoria escolhida com sucesso");

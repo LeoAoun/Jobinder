@@ -12,6 +12,7 @@ import Details from "./components/create-service-profile/Details";
 import ServiceCategories from "./components/home/service-categories/ServiceCategories";
 import MatchAndChat from "./components/match-and-chat/MatchAndChat";
 import ServiceProfile from "./components/service-profile/ServiceProfile";
+import EditSpecialty from "./components/service-profile/menu/options/EditSpecialty";
 
 import { IUser } from "@interfaces/IUser";
 import { useUsers } from "@contexts/UsersContext";
@@ -62,6 +63,9 @@ const App = () => {
         <Route path={ROUTES.ServiceCategories} element={<ServiceCategories />} />
         <Route path={ROUTES.MatchAndChat} element={<MatchAndChat />} />
         <Route path={ROUTES.ServiceProfile} element={<ServiceProfile />} />
+        <Route path="/update-service-profile">
+          <Route path={ROUTES.UpdateServiceProfileSpecialty} element={<EditSpecialty />} />
+        </Route>
         <Route path="*" element={<Navigate to={ROUTES.Home} replace />} />
       </Routes>
     </div>

@@ -7,6 +7,7 @@ enum ROUTES {
   ServiceCategories = "/service-categories",
   MatchAndChat = "/match-and-chat",
   ServiceProfile = "/service-profile",
+  UpdateServiceProfileSpecialty = "/update-service-profile/specialty",
 }
 
 export default ROUTES;

@@ -1,27 +1,12 @@
-import "@styles/components/ServiceProfile/ServiceProfileCard.css";
-import { useEffect, useState } from "react";
+import "@styles/components/service-profile/ServiceProfileCard.css";
 
-import { useAuth } from "@contexts/AuthContext";
-import { getUserDTO } from "@services/userServices";
 import { IUserDTO } from "@interfaces/IUser";
 
-export default function ServiceProfileCard() {
-  const { loggedUserId } = useAuth();
-  const [loggedUserDTO, setLoggedUserDTO] = useState<IUserDTO | null>();
+interface ServiceProfileCardProps {
+  loggedUserDTO: IUserDTO | null;
+}
 
-  // Fetch userDTO when loggedUserId changes
-  useEffect(() => {
-    const fetchUserDTO = async () => {
-      if (loggedUserId) {
-        const userDTO = await getUserDTO(loggedUserId);
-        console.log(loggedUserId);
-        setLoggedUserDTO(userDTO);
-      }
-    };
-
-    fetchUserDTO();
-  }, [loggedUserId]);
-
+export default function ServiceProfileCard({ loggedUserDTO }: ServiceProfileCardProps) {
   return (
     <div className="service-profile-card-container">
       <div className="service-profile-card">
