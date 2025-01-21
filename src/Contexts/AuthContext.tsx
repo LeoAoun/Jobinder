@@ -16,7 +16,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Load the session when the component mounts
   useEffect(() => {
-    const storedUserId = localStorage.getItem("loggedUserId");
+    const storedUserId = sessionStorage.getItem("jobinder-logged-user-id");
     if (storedUserId) {
       setLoggedUserId(storedUserId);
     }
@@ -25,9 +25,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Update the session when the loggedUserId changes
   useEffect(() => {
     if (loggedUserId !== "-1") {
-      localStorage.setItem("loggedUserId", loggedUserId);
+      sessionStorage.setItem("jobinder-logged-user-id", loggedUserId);
     } else {
-      localStorage.removeItem("loggedUserId");
+      sessionStorage.removeItem("jobinder-logged-user-id");
     }
   }, [loggedUserId]);
 

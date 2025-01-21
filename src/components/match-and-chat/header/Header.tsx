@@ -7,19 +7,43 @@ import logo from "@assets/logo.png";
 import map from "@assets/map.png";
 import magnifyingGlass from "@assets/magnifying-glass.png";
 
+import { IUserDTO } from "@interfaces/IUser";
 import { useAuth } from "@contexts/AuthContext";
 
 import { fuse } from "@utils/CategoriesFuseJS";
 
-export default function Header() {
+import { getUserDTO } from "@services/userServices";
+
+interface HeaderProps {
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  handleApplyFilter: (selectedCategory: string) => void;
+}
+
+export default function Header({ searchValue, setSearchValue, handleApplyFilter }: HeaderProps) {
   const { loggedUserId } = useAuth();
-  const [searchValue, setSearchValue] = useState<string>("");
+
+  const [loggedUserDTO, setLoggedUserDTO] = useState<IUserDTO | null>(null);
   const [categoriesFound, setCategoriesFound] = useState<FuseResult<string>[]>([]);
+
+  // Fix the bug where the dropdown should disappear when clicking on a category
+  const [specialtyClicked, setSpecialtyClicked] = useState<boolean>(false);
+
+  // Fetch logged user DTO when component mounts
+  useEffect(() => {
+    const fetchLoggedUser = async () => {
+      const user: IUserDTO | null = await getUserDTO(loggedUserId);
+      setLoggedUserDTO(user);
+    };
+
+    fetchLoggedUser();
+  }, [loggedUserId]);
 
   // Update categoriesFound when searchValue changes
   useEffect(() => {
-    if (searchValue.trim() === "") {
+    if (searchValue.trim() === "" || specialtyClicked) {
       setCategoriesFound([]);
+      setSpecialtyClicked(false);
       return;
     }
 
@@ -30,6 +54,13 @@ export default function Header() {
 
     setCategoriesFound(result);
   }, [searchValue]);
+
+  // Handle click on dropdown item
+  const handleClick = (category: string) => {
+    setSpecialtyClicked(true);
+    setSearchValue(category);
+    handleApplyFilter(category);
+  };
 
   return (
     <nav className="match-and-chat-header">
@@ -45,13 +76,15 @@ export default function Header() {
             type="text"
             placeholder="Procurar por serviço"
             value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)} // Atualiza searchValue
+            onChange={(e) => setSearchValue(e.target.value)}
           />
           <img src={magnifyingGlass} alt="Magnifying Glass" />
           {categoriesFound.length > 0 && (
             <ul className="dropdown">
               {categoriesFound.map((category: FuseResult<string>, index) => (
-                <li key={index}>{category.item}</li>
+                <li key={index} onClick={() => handleClick(category.item)}>
+                  {category.item}
+                </li>
               ))}
             </ul>
           )}
@@ -60,7 +93,9 @@ export default function Header() {
           <img src={map} />
         </button>
       </div>
-      <span className="greeting-logged-user">Olá {loggedUserId === "-1" ? "Visitante" : ""}</span>
+      <span className="greeting-logged-user">
+        Olá {loggedUserId === "-1" ? "Visitante" : loggedUserDTO?.fullName.split(" ")[0]}
+      </span>
     </nav>
   );
 }

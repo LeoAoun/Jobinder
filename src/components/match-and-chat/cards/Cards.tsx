@@ -13,19 +13,28 @@ import { useProfileDetails } from "@contexts/ProfileDetailsContext";
 
 import { addMatch, getMatches } from "@services/matchServices.ts";
 
-export default function Cards() {
+interface CardsProps {
+  profiles: IUserDTO[];
+  setProfiles: React.Dispatch<React.SetStateAction<IUserDTO[]>>;
+  filterTerm: string; // Novo valor de filtro para buscar
+}
+
+export default function Cards({ profiles, setProfiles, filterTerm }: CardsProps) {
   const { loggedUserId } = useAuth();
 
   const { usersDTO } = useUsersDTO();
   const { matches, setMatches } = useMatches();
   const { setProfileDetails } = useProfileDetails();
 
-  const [profiles, setProfiles] = useState<IUserDTO[]>([]);
   const [removedProfiles, setRemovedProfiles] = useState<IUserDTO[]>([]);
 
   const holdTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isDraggingRef = useRef(false);
   const hasMovedRef = useRef(false);
+
+  const filteredProfiles = profiles.filter((profile) =>
+    profile.serviceProfile?.specialty.toLowerCase().includes(filterTerm.toLowerCase())
+  );
 
   // Fetch matches from the database
   useEffect(() => {
@@ -105,7 +114,7 @@ export default function Cards() {
 
   return (
     <div className="card-container">
-      {profiles.map((profile) => (
+      {filteredProfiles.map((profile) => (
         <TinderCard
           key={profile.phone}
           className="swipe"

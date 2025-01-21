@@ -72,7 +72,7 @@
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background-size: cover;
+  object-fit: cover;
 }
 
 .chat-container .chat-box .name-and-last-message {

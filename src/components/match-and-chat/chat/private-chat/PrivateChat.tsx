@@ -23,18 +23,20 @@ export default function PrivateChat({ privateChatUser, setPrivateChatUser }: Cha
 
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
+  const fetchChatMessages = async () => {
+    if (!privateChatUser) return;
+
+    const chatMessages: IChatMessages = await getChatMessages(loggedUserId, privateChatUser?.phone);
+    setChatMessages(chatMessages);
+  };
+
+  // Fetch chat messages every 2 seconds
+  setInterval(() => {
+    fetchChatMessages();
+  }, 2000);
+
   // Fetch chat messages from the database
   useEffect(() => {
-    const fetchChatMessages = async () => {
-      if (!privateChatUser) return;
-
-      const chatMessages: IChatMessages = await getChatMessages(
-        loggedUserId,
-        privateChatUser?.phone
-      );
-      setChatMessages(chatMessages);
-    };
-
     fetchChatMessages();
   }, [loggedUserId, privateChatUser, setChatMessages]);
 

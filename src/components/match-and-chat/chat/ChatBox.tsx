@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import noServiceImg from "@assets/no-service-img.webp";
+
 import { IUserDTO } from "@interfaces/IUser";
 import { useAuth } from "@contexts/AuthContext";
 
@@ -75,7 +77,7 @@ export default function ChatBox({
             onClick={() => handleOpenPrivateChat(user)}
           >
             <div className="chat-box-info">
-              <img className="img" src={user.serviceProfile?.serviceImg} />
+              <img className="img" src={user.serviceProfile?.serviceImg ? user.serviceProfile?.serviceImg : noServiceImg} />
               <div className="name-and-last-message">
                 <span className="name">{`${firstName} ${lastName}`}</span>
                 <span className="last-message">{lastMessage}</span>
