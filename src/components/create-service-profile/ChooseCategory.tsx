@@ -26,7 +26,7 @@ export default function ChooseCategory() {
 
         if (!userDTO) return;
 
-        if (userDTO.serviceProfile) {
+        if (userDTO.serviceProfile && Object.keys(userDTO.serviceProfile).length < 2) {
           navigate(ROUTES.ServiceProfile);
         }
       }

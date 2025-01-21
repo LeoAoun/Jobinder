@@ -18,7 +18,7 @@
 .create-service-profile-container .create-service-profile-form {
   background-color: #fff;
 
-  width: 25rem;
+  width: 24rem;
   padding: 1rem 2rem;
   border-radius: 1rem;
   gap: 2rem;
@@ -32,7 +32,7 @@
 
 .create-service-profile-container .create-service-profile-form h1 {
   color: var(--blue);
-  font-size: 1.9rem;
+  font-size: 1.8rem;
   font-weight: 700;
   text-decoration: underline;
 }
@@ -148,5 +148,52 @@
 
   &:hover {
     background-color: var(--darkBlue);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .create-service-profile-container {
+    gap: 2rem;
+  }
+
+  .create-service-profile-container .logo {
+    width: 18rem;
+  }
+
+  .create-service-profile-container .create-service-profile-form {
+    width: 20rem;
+  }
+
+  .create-service-profile-container .create-service-profile-form h1 {
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  .create-service-profile-container .create-service-profile-form form label {
+    font-size: 1.1rem;
+  }
+
+  .create-service-profile-container .create-service-profile-form form > span {
+    font-size: 1rem;
+  }
+
+  .create-service-profile-container .create-service-profile-form form textarea {
+    font-size: 1rem;
+  }
+
+  .create-service-profile-container .create-service-profile-form form input[type="text"] {
+    font-size: 1rem;
+  }
+
+  .create-service-profile-container .create-service-profile-form form select {
+    font-size: 1rem;
+  }
+
+  .create-service-profile-container .create-service-profile-form form select option {
+    font-size: 1rem;
+  }
+
+  .create-service-profile-container .create-service-profile-form form input[type="file"] {
+    font-size: 0.8rem;
   }
 }

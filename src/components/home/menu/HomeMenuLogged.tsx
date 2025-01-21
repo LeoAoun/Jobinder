@@ -11,6 +11,7 @@ import { getUserDTO } from "@services/userServices";
 export default function HomeMenuLogged() {
   const { loggedUserId, setLoggedUserId } = useAuth();
 
+  const [loggedUserHasServiceProfile, setLoggedUserHasServiceProfile] = useState<boolean>(false);
   const [loggedUserDTO, setLoggedUserDTO] = useState<IUserDTO | null>(null);
 
   // Fetch logged user DTO when component mounts
@@ -18,6 +19,10 @@ export default function HomeMenuLogged() {
     const fetchLoggedUser = async () => {
       const user: IUserDTO | null = await getUserDTO(loggedUserId);
       setLoggedUserDTO(user);
+
+      if (user?.serviceProfile && user.serviceProfile.description) {
+        setLoggedUserHasServiceProfile(true);
+      }
     };
 
     fetchLoggedUser();
@@ -29,13 +34,13 @@ export default function HomeMenuLogged() {
 
   return (
     <div className="menu-logged">
-      {loggedUserDTO?.serviceProfile ? (
+      {loggedUserHasServiceProfile ? (
         <Link className="service-profile" to="/service-profile">
-          <span>PERFIL DE SERVIÇOS</span>
+          <span>PERFIL</span>
         </Link>
       ) : (
         <Link className="create-service-profile" to="/create-service-profile/categories">
-          <span>CRIAR PERFIL DE SERVIÇOS</span>
+          <span>CRIAR PERFIL</span>
         </Link>
       )}
       <span className="exit-login" onClick={handleExitLogin}>
@@ -45,7 +50,9 @@ export default function HomeMenuLogged() {
         <img
           className="menu-logged-user-img"
           src={
-            loggedUserDTO?.serviceProfile ? loggedUserDTO?.serviceProfile.serviceImg : noServiceImg
+            loggedUserHasServiceProfile && loggedUserDTO?.serviceProfile
+              ? loggedUserDTO.serviceProfile.serviceImg
+              : noServiceImg
           }
         />
         <span>{loggedUserDTO?.fullName.split(" ")[0]}</span>

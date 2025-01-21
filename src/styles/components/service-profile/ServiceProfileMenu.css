@@ -26,6 +26,17 @@
   align-items: center;
 }
 
+.service-profile-menu-container .menu-other-options .close-menu {
+  cursor: pointer;
+  background-color: var(--red);
+
+  transition: background-color 0.2;
+
+  &:hover {
+    background-color: var(--darkRed);
+  }
+}
+
 .service-profile-menu-container h2 {
   background-color: #314b57;
   color: #fff;
@@ -96,4 +107,36 @@
 
 .service-profile-menu-container .menu-edit-options button img {
   width: 1.5rem;
+}
+
+@media screen and (max-width: 900px) {
+  .service-profile-menu-container {
+    width: 25%;
+    min-width: 20rem;
+    height: 100%;
+
+    position: fixed;
+
+    z-index: 2;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .service-profile-menu-container {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .service-profile-menu-container .menu-other-options .link,
+  .service-profile-menu-container .menu-other-options button {
+    font-size: 1.1rem;
+    padding: 0.9rem;
+  }
+
+  .service-profile-menu-container .menu-edit-options button {
+    padding: 0.9rem;
+    gap: 0.5rem;
+  }
 }

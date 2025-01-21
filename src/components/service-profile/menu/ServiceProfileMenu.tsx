@@ -20,16 +20,19 @@ import { IUserDTO } from "@interfaces/IUser";
 interface ServiceProfileMenuProps {
   loggedUserDTO: IUserDTO | null;
   setLoggedUserDTO: React.Dispatch<React.SetStateAction<IUserDTO | null>>;
+  setCloseMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ServiceProfileMenu({
   loggedUserDTO,
   setLoggedUserDTO,
+  setCloseMenu,
 }: ServiceProfileMenuProps) {
   const navigate = useNavigate();
 
   const [choosedOption, setChoosedOption] = useState<string | null>(null);
 
+  // Redirect to UpdateServiceProfileSpecialty when choosedOption is "edit-specialty"
   useEffect(() => {
     if (choosedOption === "edit-specialty") {
       navigate(ROUTES.UpdateServiceProfileSpecialty);
@@ -83,6 +86,9 @@ export default function ServiceProfileMenu({
         <div className="menu-options">
           <div className="menu-other-options">
             <h2>Menu</h2>
+            <button className="close-menu" onClick={() => setCloseMenu(true)}>
+              X
+            </button>
             <Link to={ROUTES.Home} className="link">
               <span>Página Inicial</span>
             </Link>
@@ -90,7 +96,6 @@ export default function ServiceProfileMenu({
             <button>Chat</button>
           </div>
           <div className="menu-edit-options">
-            {/* <h2>Editar</h2> */}
             <button onClick={() => setChoosedOption("edit-specialty")}>
               <img src={specialty} />
               <span>Editar Especialidade</span>

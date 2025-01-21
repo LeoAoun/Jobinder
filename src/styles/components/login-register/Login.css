@@ -92,3 +92,13 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+@media screen and (max-width:400px) {
+  .login .logo {
+    width: 15rem;
+  }
+
+  .login .login-form {
+    width: 20rem;
+  }
+}

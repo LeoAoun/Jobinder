@@ -1,4 +1,4 @@
-import "@styles/components/Login.css";
+import "@styles/components/login-register/Login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

@@ -1,12 +1,37 @@
 import "@styles/components/service-profile/ServiceProfileCard.css";
 
 import { IUserDTO } from "@interfaces/IUser";
+import { useEffect } from "react";
 
 interface ServiceProfileCardProps {
   loggedUserDTO: IUserDTO | null;
+  setCloseMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ServiceProfileCard({ loggedUserDTO }: ServiceProfileCardProps) {
+export default function ServiceProfileCard({
+  loggedUserDTO,
+  setCloseMenu,
+}: ServiceProfileCardProps) {
+  // UseEffect to see the changes in width
+  useEffect(() => {
+    const handleResize = () => {
+      console.log(window.innerWidth);
+      if (window.innerWidth > 900) {
+        setCloseMenu(false);
+      } else {
+        setCloseMenu(true);
+      }
+    };
+
+    handleResize(); // Call handleResize to set closeMenu when the page is loaded
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setCloseMenu]);
+
   return (
     <div className="service-profile-card-container">
       <div className="service-profile-card">
@@ -29,6 +54,10 @@ export default function ServiceProfileCard({ loggedUserDTO }: ServiceProfileCard
           <span>{loggedUserDTO?.serviceProfile?.description}</span>
         </div>
       </div>
+
+      <button className="open-menu" onClick={() => setCloseMenu(false)}>
+        Menu
+      </button>
     </div>
   );
 }

@@ -32,6 +32,7 @@
   gap: 1rem;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .home-content .home-content-buttons button {
@@ -61,5 +62,29 @@
 
   &:hover {
     background-color: var(--darkGreen);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-content {
+    height: 100%;
+    padding: 2rem;
+    gap: 3rem;
+  }
+
+  
+  .home-content .home-content-text h1 {
+    font-size: 3rem;
+  }
+
+  .home-content .home-content-text p {
+    font-size: 1.2rem;
+    width: 90%;
+  }
+
+  .home-content .home-content-buttons button {
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
   }
 }

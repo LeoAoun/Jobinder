@@ -5,8 +5,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import ROUTES from "@routes";
 
 import Home from "./components/home/Home";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import Register from "./components/login-register/Register";
+import Login from "./components/login-register/Login";
 import ChooseCategory from "./components/create-service-profile/ChooseCategory";
 import Details from "./components/create-service-profile/Details";
 import ServiceCategories from "./components/home/service-categories/ServiceCategories";
