@@ -25,9 +25,30 @@ export default function Header({ searchValue, setSearchValue, handleApplyFilter 
 
   const [loggedUserDTO, setLoggedUserDTO] = useState<IUserDTO | null>(null);
   const [categoriesFound, setCategoriesFound] = useState<FuseResult<string>[]>([]);
+  const [showLogo, setShowLogo] = useState<boolean>(true);
 
   // Fix the bug where the dropdown should disappear when clicking on a category
   const [specialtyClicked, setSpecialtyClicked] = useState<boolean>(false);
+
+  // UseEffect to see the changes in viewport width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 600) {
+        setShowLogo(true);
+      } else {
+        setShowLogo(false);
+      }
+    };
+
+    // Call handleResize to set showLogo when the page is loaded
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setShowLogo]);
 
   // Fetch logged user DTO when component mounts
   useEffect(() => {
@@ -64,9 +85,12 @@ export default function Header({ searchValue, setSearchValue, handleApplyFilter 
 
   return (
     <nav className="match-and-chat-header">
-      <Link to="/home">
-        <img className="logo" src={logo} alt="Logo" />
-      </Link>
+      {showLogo ? (
+        <Link to="/home">
+          <img className="logo" src={logo} alt="Logo" />
+        </Link>
+      ) : null}
+
       <div className="search-and-map">
         <div
           className="search-box"
@@ -94,7 +118,7 @@ export default function Header({ searchValue, setSearchValue, handleApplyFilter 
         </button>
       </div>
       <span className="greeting-logged-user">
-        Olá {loggedUserId === "-1" ? "Visitante" : loggedUserDTO?.fullName.split(" ")[0]}
+        Olá, {loggedUserId === "-1" ? "Visitante" : loggedUserDTO?.fullName.split(" ")[0]}!
       </span>
     </nav>
   );

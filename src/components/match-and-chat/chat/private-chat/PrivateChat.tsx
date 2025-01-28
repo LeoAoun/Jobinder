@@ -1,5 +1,5 @@
 import "@styles/components/match-and-chat/chat/PrivateChat.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import PrivateChatHeader from "./PrivateChatHeader";
 import PrivateChatMessagesContainer from "./PrivateChatMessagesContainer";
@@ -20,6 +20,7 @@ interface ChatMessagesProps {
 export default function PrivateChat({ privateChatUser, setPrivateChatUser }: ChatMessagesProps) {
   const { loggedUserId } = useAuth();
   const { chatMessages, setChatMessages } = useChatMessages();
+  const [scrollToBottom, setScrollToBottom] = useState<boolean>(false);
 
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -44,8 +45,9 @@ export default function PrivateChat({ privateChatUser, setPrivateChatUser }: Cha
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      setScrollToBottom(false);
     }
-  }, [chatMessages, privateChatUser]);
+  }, [scrollToBottom]);
 
   return (
     <div className="private-chat">
@@ -59,7 +61,10 @@ export default function PrivateChat({ privateChatUser, setPrivateChatUser }: Cha
         chatMessages={chatMessages}
       />
 
-      <PrivateChatInputContainer privateChatUser={privateChatUser} />
+      <PrivateChatInputContainer
+        privateChatUser={privateChatUser}
+        setScrollToBottom={setScrollToBottom}
+      />
     </div>
   );
 }

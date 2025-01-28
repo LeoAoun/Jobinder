@@ -30,7 +30,7 @@ export default function EditDescription({
         return;
       }
 
-      if (description.length > 200) {
+      if (description.length > 150) {
         toast.error("A descrição dos serviços está muito longa");
         return;
       }

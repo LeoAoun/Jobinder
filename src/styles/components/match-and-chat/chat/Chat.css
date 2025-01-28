@@ -1,6 +1,6 @@
 .chat-container {
   background-image: linear-gradient(to right top, #365462, #3e5d6c, #456776, #4d7181, #557b8b);
-  
+
   width: 30rem;
   height: 100vh;
   gap: 2rem;
@@ -21,8 +21,10 @@
 }
 
 .chat-container .chat-header {
+  width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 .chat-container .chat-header h2 {
@@ -30,12 +32,35 @@
   margin: 1rem;
 }
 
-.chat-container .chat-header input {
+.chat-container .chat-header div {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.chat-container .chat-header div input {
+  width: 65%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   border: none;
   appearance: none;
   outline: none;
-  border-radius: 0.5rem;
+}
+
+.chat-container .chat-header div .close-chat-container {
+  cursor: pointer;
+  background-color: var(--red);
+  color: #fff;
+  font-size: 1rem;
   padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--darkRed);
+  }
 }
 
 .chat-container .chat-list {
@@ -97,4 +122,18 @@
 
   border: none;
   background: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .chat-container {
+    width: 25rem;
+    position: fixed;
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .chat-container {
+    width: 100%;
+  }
 }

@@ -112,7 +112,7 @@ export default function Details() {
       return;
     }
 
-    if (description.length > 200) {
+    if (description.length > 150) {
       toast.error("A descrição dos serviços está muito longa");
       return;
     }

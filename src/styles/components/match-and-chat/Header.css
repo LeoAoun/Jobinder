@@ -1,5 +1,7 @@
 .match-and-chat-header {
   background-color: var(--blue);
+
+  width: 100%;
   padding: 1rem;
   gap: 1rem;
 
@@ -96,4 +98,36 @@
   padding: 0.5rem;
   border-radius: 0.5rem;
   text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .match-and-chat-header .search-and-map .search-box {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .match-and-chat-header .search-and-map {
+    gap: 1rem;
+  }
+
+  .match-and-chat-header .search-and-map .search-box input {
+    text-indent: 0.4rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .match-and-chat-header .search-and-map .search-box {
+    width: 75%;
+  }
+
+  .match-and-chat-header .search-and-map .search-box input {
+    font-size: 0.8rem;
+  }
+
+  .match-and-chat-header .search-and-map .search-box img {
+    padding: 0.5rem;
+    width: 2.2rem;
+  }
 }

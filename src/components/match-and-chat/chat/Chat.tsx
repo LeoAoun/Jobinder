@@ -13,7 +13,11 @@ import { useMatches } from "@contexts/MatchesContext";
 import { getUserDTO } from "@services/userServices";
 import { getMatch } from "@services/matchServices";
 
-export default function Chat() {
+interface ChatProps {
+  setCloseChatContainer: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Chat({ setCloseChatContainer }: ChatProps) {
   const { loggedUserId } = useAuth();
   const { matches } = useMatches();
 
@@ -54,7 +58,13 @@ export default function Chat() {
   return (
     <>
       <div className="chat-container">
-        <ChatHeader searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        {!privateChatUser ? (
+          <ChatHeader
+            setCloseChatContainer={setCloseChatContainer}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+          />
+        ) : null}
 
         {!privateChatUser ? (
           filteredUsers.length > 0 ? (

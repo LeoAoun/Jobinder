@@ -9,10 +9,12 @@ import { addChatMessage, getChatMessages } from "@services/chatServices";
 
 interface PrivateChatInputContainerProps {
   privateChatUser: IUserDTO | null;
+  setScrollToBottom: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function PrivateChatInputContainer({
   privateChatUser,
+  setScrollToBottom,
 }: PrivateChatInputContainerProps) {
   const { loggedUserId } = useAuth();
   const { setChatMessages } = useChatMessages();
@@ -37,6 +39,8 @@ export default function PrivateChatInputContainer({
     if (textAreaRef.current) {
       textAreaRef.current.style.height = "auto";
     }
+
+    setScrollToBottom(true);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
