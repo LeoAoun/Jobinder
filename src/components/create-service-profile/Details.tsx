@@ -10,7 +10,12 @@ import { useAuth } from "@contexts/AuthContext";
 import { IServiceProfile, IUser, IUserDTO } from "@interfaces/IUser";
 
 import { getStates, getCities } from "@services/locationServices";
-import { getUser, updateUserServiceProfile, convertImageToBase64, getUserDTO } from "@services/userServices";
+import {
+  getUser,
+  updateUserServiceProfile,
+  convertImageToBase64,
+  getUserDTO,
+} from "@services/userServices";
 
 export default function Details() {
   const navigate = useNavigate();
@@ -22,11 +27,18 @@ export default function Details() {
   const [states, setStates] = useState<{ sigla: string; nome: string }[]>([]);
   const [cities, setCities] = useState<string[]>([]);
 
-  const [description, setDescription] = useState("");
-  const [availability, setAvailability] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [serviceImg, setServiceImg] = useState<File | null>(null);
+  const [formData, setFormData] = useState({
+    description: "",
+    availability: "",
+    state: "",
+    city: "",
+    serviceImg: null as File | null,
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const updateFormData = (field: string, value: any) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   // Fetch logged user DTO when component mounts
   useEffect(() => {
@@ -72,18 +84,20 @@ export default function Details() {
   // Fetch cities when state changes
   useEffect(() => {
     const fetchCities = async () => {
-      if (state) {
-        const citiesFetched = await getCities(state);
+      if (formData.state) {
+        const citiesFetched = await getCities(formData.state);
         setCities(citiesFetched);
       }
     };
 
     fetchCities();
-  }, [state]);
+  }, [formData.state]);
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const { description, availability, state, city, serviceImg } = formData;
 
     const user: IUser | null = await getUser(loggedUserId);
 
@@ -167,8 +181,8 @@ export default function Details() {
             id="services"
             placeholder="Descreva os serviços que você oferece"
             rows={5}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={formData.description}
+            onChange={(e) => updateFormData("description", e.target.value)}
           ></textarea>
 
           <label htmlFor="avaliability">Disponibilidade:</label>
@@ -176,12 +190,20 @@ export default function Details() {
             id="avaliability"
             type="text"
             placeholder="Ex: Segunda a Sexta, 8h - 18h"
-            value={availability}
-            onChange={(e) => setAvailability(e.target.value)}
+            value={formData.availability}
+            onChange={(e) => updateFormData("availability", e.target.value)}
           />
 
           <label htmlFor="state">Estado:</label>
-          <select id="state" value={state} onChange={(e) => setState(e.target.value)}>
+          <select
+            id="state"
+            value={formData.state}
+            onChange={(e) => {
+              const selectedState = e.target.value;
+              updateFormData("state", selectedState);
+              setCities([]); // Reset cities when state changes
+            }}
+          >
             <option value="" disabled>
               Selecione um estado
             </option>
@@ -193,7 +215,11 @@ export default function Details() {
           </select>
 
           <label htmlFor="city">Cidade:</label>
-          <select id="city" value={city} onChange={(e) => setCity(e.target.value)}>
+          <select
+            id="city"
+            value={formData.city}
+            onChange={(e) => updateFormData("city", e.target.value)}
+          >
             <option value="" disabled>
               Selecione uma cidade
             </option>
@@ -211,7 +237,7 @@ export default function Details() {
             accept="image/*"
             onChange={(e) => {
               const file = e.target.files?.[0] || null;
-              setServiceImg(file);
+              updateFormData("serviceImg", file);
             }}
           />
           <button type="submit">Criar Perfil</button>
