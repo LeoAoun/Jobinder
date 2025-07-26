@@ -4,51 +4,22 @@ import { getCities } from "../services/locationServices";
 
 import { IUser } from "../../interfaces/IUser";
 import { createUsers } from "../services/userServices";
+import {
+  advocaciaServices,
+  cozinheiroServices,
+  desenvolvedorServices,
+  DJServices,
+  eletricistaServices,
+  encanadorServices,
+  jardineiroServices,
+  manicureServices,
+  marceneiroServices,
+  personalServices,
+  pintorServices,
+  saudeServices,
+} from "./fakeUserServices";
 
-const imgs = [
-  "adv1.jpeg",
-  "adv2.jpeg",
-  "adv3.jpeg",
-  "coz1.jpeg",
-  "coz2.jpeg",
-  "coz3.jpeg",
-  "dj1.jpeg",
-  "dj2.jpeg",
-  "dj3.jpeg",
-  "ele1.jpeg",
-  "ele2.jpeg",
-  "ele3.jpeg",
-  "enc1.jpeg",
-  "enc2.jpeg",
-  "enc3.jpeg",
-  "j1.png",
-  "j2.png",
-  "j3.png",
-  "j4.png",
-  "j5.png",
-  "man1.jpeg",
-  "man2.jpeg",
-  "man3.jpeg",
-  "mar1.jpg",
-  "mar2.jpg",
-  "mar3.jpg",
-  "per1.jpeg",
-  "per2.jpeg",
-  "per3.jpeg",
-  "pin1.jpg",
-  "pin2.jpg",
-  "s1.png",
-  "s2.png",
-  "s3.png",
-  "s4.png",
-  "s5.png",
-  "s6.png",
-  "sau1.jpeg",
-  "sau2.jpeg",
-  "sau3.jpeg",
-];
-
-const specialtiesList = [
+const specialtiesList: string[] = [
   "Advocacia", // 0 - 2
   "Cozinheiro", // 3 - 5
   "Musica", // 6 - 8
@@ -63,7 +34,37 @@ const specialtiesList = [
   "Saúde", // 37 - 39
 ];
 
-const availabilityList = [
+const imagesBySpecialty: Record<string, string[]> = {
+  Advocacia: ["adv1.jpeg", "adv2.jpeg", "adv3.jpeg"],
+  Cozinheiro: ["coz1.jpeg", "coz2.jpeg", "coz3.jpeg"],
+  Musica: ["dj1.jpeg", "dj2.jpeg", "dj3.jpeg"],
+  Eletricista: ["ele1.jpeg", "ele2.jpeg", "ele3.jpeg"],
+  Encanador: ["enc1.jpeg", "enc2.jpeg", "enc3.jpeg"],
+  Jardinagem: ["j1.png", "j2.png", "j3.png", "j4.png", "j5.png"],
+  Manicure: ["man1.jpeg", "man2.jpeg", "man3.jpeg"],
+  Marcenaria: ["mar1.jpg", "mar2.jpg", "mar3.jpg"],
+  Personal: ["per1.jpeg", "per2.jpeg", "per3.jpeg"],
+  Pintor: ["pin1.jpg", "pin2.jpg"],
+  "Desenvolvedor de Software": ["s1.png", "s2.png", "s3.png", "s4.png", "s5.png", "s6.png"],
+  Saúde: ["sau1.jpeg", "sau2.jpeg", "sau3.jpeg"],
+};
+
+const servicesBySpecialty: Record<string, string[]> = {
+  Advocacia: advocaciaServices,
+  Cozinheiro: cozinheiroServices,
+  Musica: DJServices,
+  Eletricista: eletricistaServices,
+  Encanador: encanadorServices,
+  Jardinagem: jardineiroServices,
+  Manicure: manicureServices,
+  Marcenaria: marceneiroServices,
+  Personal: personalServices,
+  Pintor: pintorServices,
+  "Desenvolvedor de Software": desenvolvedorServices,
+  Saúde: saudeServices,
+};
+
+const availabilityList: string[] = [
   "Segunda a sexta-feira das 8h às 18h",
   "Segunda a sexta-feira das 9h às 19h",
   "Segunda a sexta-feira das 10h às 20h",
@@ -71,7 +72,7 @@ const availabilityList = [
   "Segunda a sexta-feira das 12h às 22h",
 ];
 
-const usersToGenerate: number = 5;
+const usersToGenerate: number = 40;
 
 const getRandomUsers = async () => {
   try {
@@ -86,7 +87,7 @@ const getRandomUsers = async () => {
   }
 };
 
-const getSpecialty = (index: number): string => {
+const getSpecialtyByIndex = (index: number): string => {
   const totalSpecialties = specialtiesList.length;
 
   const cyclicIndex = index % totalSpecialties;
@@ -100,29 +101,51 @@ const createFakeUsers = async () => {
   const users = await getRandomUsers();
   const cities = await getCities("SP");
 
+  // Create a counter for each specialty to cycle through images
+  const imageCounters: Record<string, number> = {};
+  specialtiesList.forEach((specialty) => {
+    imageCounters[specialty] = 0;
+  });
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   users.forEach((user: any, index: number) => {
     const phone = user.cell.replace(/[^0-9]/g, "");
+
+    const fullName = `${user.name.first} ${user.name.last}`;
+
     const hashPassword = bcrypt.hashSync(user.login.password, 10);
 
+    const specialty = getSpecialtyByIndex(index);
+
     const randomRating = Math.floor(Math.random() * 5) + 1;
+
     const randomServicesPerformed = Math.floor(Math.random() * 100);
+
     const getRandomCity = cities[Math.floor(Math.random() * cities.length)];
+
     const randomAvailability =
       availabilityList[Math.floor(Math.random() * availabilityList.length)];
 
+    const relevantImages = imagesBySpecialty[specialty];
+    const currentImageIndex = imageCounters[specialty];
+    const sequentialImage = relevantImages[currentImageIndex % relevantImages.length];
+    const serviceImg = `assets/images/${sequentialImage}`;
+    imageCounters[specialty]++;
+
+    const relevantServices = servicesBySpecialty[specialty];
+    const randomDescription = relevantServices[Math.floor(Math.random() * relevantServices.length)];
+
     const userTest: IUser = {
-      phone,
-      fullName: `${user.name.first} ${user.name.last}`,
+      phone: phone,
+      fullName: fullName,
       password: hashPassword,
       serviceProfile: {
-        serviceImg: `assets/images/${imgs[index]}`,
+        serviceImg: serviceImg,
         servicesPerformed: randomServicesPerformed,
         rating: randomRating,
-        specialty: getSpecialty(index),
+        specialty: specialty,
         availability: randomAvailability,
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc ultricies tincidunt. Nullam nec purus nec nunc",
+        description: randomDescription,
         location: {
           city: getRandomCity,
           state: "SP",

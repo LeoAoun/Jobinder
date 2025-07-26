@@ -1,4 +1,4 @@
-const jardineiroServices = [
+const jardineiroServices: string[] = [
   "Especialista em poda de formação e condução, aplicando técnicas adequadas a cada espécie.",
   "Experiência em manejo de sistemas de irrigação automatizados para jardins residenciais e comerciais.",
   "Realizo adubação orgânica e química balanceada, de acordo com a necessidade do solo e das plantas.",
@@ -11,7 +11,7 @@ const jardineiroServices = [
   "Capacitado em manutenção e afiação de ferramentas de jardinagem para maior eficiência.",
 ];
 
-const marceneiroServices = [
+const marceneiroServices: string[] = [
   "Faço móveis sob medida com precisão e acabamento de alta qualidade.",
   "Especialista em restauração de móveis antigos, devolvendo vida às peças.",
   "Trabalho com cortes e encaixes perfeitos para móveis personalizados.",
@@ -24,7 +24,7 @@ const marceneiroServices = [
   "Leitura de projetos técnicos e execução fiel das ideias.",
 ];
 
-const pintorServices = [
+const pintorServices: string[] = [
   "Especialista em pintura residencial interna e externa, com acabamento de alta qualidade.",
   "Aplicação de texturas e efeitos decorativos, como grafiato e marmorato.",
   "Experiência em pintura automotiva, com foco em polimento e retoques.",
@@ -37,7 +37,7 @@ const pintorServices = [
   "Capacitado em pintura de paredes, portas e móveis com acabamento detalhado.",
 ];
 
-const DJServices = [
+const DJServices: string[] = [
   "Especialista em mixagens ao vivo, criando transições suaves entre diferentes estilos musicais.",
   "Experiência em eventos, festas e casamentos, com repertório personalizado.",
   "Domínio em softwares como Serato, Traktor e Rekordbox para performances precisas.",
@@ -50,7 +50,7 @@ const DJServices = [
   "Domínio de técnicas de scratching e beatmatching para apresentações dinâmicas.",
 ];
 
-const advocaciaServices = [
+const advocaciaServices: string[] = [
   "Especialista em Direito Civil, com experiência em contratos e resolução de disputas.",
   "Atuo em Direito Trabalhista, defendendo os direitos de empresas e trabalhadores.",
   "Experiência em Direito Penal, com foco em defesa e assistência jurídica.",
@@ -63,7 +63,7 @@ const advocaciaServices = [
   "Atendo causas relacionadas a propriedade intelectual, marcas e patentes.",
 ];
 
-const personalServices = [
+const personalServices: string[] = [
   "Especialista em musculação e hipertrofia, focado em alcançar resultados de força e definição.",
   "Atuo com treinamento funcional, promovendo equilíbrio, mobilidade e qualidade de vida.",
   "Experiência em preparação física para atletas amadores e profissionais.",
@@ -75,7 +75,7 @@ const personalServices = [
   "Acompanho indivíduos com condições especiais, adaptando treinos para necessidades específicas.",
 ];
 
-const manicureServices = [
+const manicureServices: string[] = [
   "Especialista em unhas de gel e alongamentos com acabamento natural e duradouro.",
   "Atuo com esmaltação clássica, trazendo sofisticação e elegância para todas as ocasiões.",
   "Experiência em nail art detalhada, com designs personalizados para cada cliente.",
@@ -88,7 +88,7 @@ const manicureServices = [
   "Personalizo cores e estilos de esmaltação para atender às preferências exclusivas de cada cliente.",
 ];
 
-const cozinheiroServices = [
+const cozinheiroServices: string[] = [
   "Especialista em culinária brasileira, com pratos tradicionais e regionais autênticos.",
   "Atuo com gastronomia internacional, incluindo pratos italianos, franceses e asiáticos.",
   "Experiência em cozinha saudável, criando refeições balanceadas e saborosas.",
@@ -101,7 +101,7 @@ const cozinheiroServices = [
   "Ofereço aulas particulares de culinária, ensinando técnicas e receitas de diferentes estilos.",
 ];
 
-const eletricistaServices = [
+const eletricistaServices: string[] = [
   "Especialista em instalações elétricas residenciais, garantindo segurança e eficiência.",
   "Atuo com manutenção e reparos elétricos para sistemas de baixa e média tensão.",
   "Experiência em instalação de sistemas de energia solar e soluções sustentáveis.",
@@ -114,7 +114,7 @@ const eletricistaServices = [
   "Atuo com sistemas de segurança, incluindo instalação de câmeras, alarmes e interfone.",
 ];
 
-const encanadorServices = [
+const encanadorServices: string[] = [
   "Especialista em instalação e manutenção de sistemas hidráulicos residenciais.",
   "Realizo reparos em vazamentos, entupimentos e trocas de encanamento.",
   "Experiência na instalação de redes de água quente e fria.",
@@ -127,7 +127,7 @@ const encanadorServices = [
   "Faço a troca e instalação de bombas d’água e aquecedores.",
 ];
 
-const desenvolvedorServices = [
+const desenvolvedorServices: string[] = [
   "Especialista em desenvolvimento front-end, com foco em interfaces responsivas e design moderno.",
   "Atuo com desenvolvimento back-end, criando APIs robustas e escaláveis.",
   "Experiência em desenvolvimento full stack, integrando front-end e back-end com eficiência.",
@@ -140,7 +140,7 @@ const desenvolvedorServices = [
   "Ofereço consultoria em segurança cibernética, protegendo aplicações contra vulnerabilidades.",
 ];
 
-const saudeServices = [
+const saudeServices: string[] = [
   "Consultas médicas presenciais e por telemedicina, com foco em diagnósticos precisos.",
   "Atendimento nutricional personalizado para perda de peso, ganho de massa muscular e reeducação alimentar.",
   "Acompanhamento psicológico para ansiedade, depressão e outros transtornos emocionais.",

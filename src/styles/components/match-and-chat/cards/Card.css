@@ -5,6 +5,7 @@
 }
 
 .card-container {
+  user-select: none;
   background-color: var(--grey);
   overflow: hidden;
 
