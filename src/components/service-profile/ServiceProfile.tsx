@@ -1,9 +1,10 @@
 import "@styles/components/service-profile/ServiceProfile.css";
+import { useEffect, useState } from "react";
 
 import ServiceProfileMenu from "./menu/ServiceProfileMenu";
 import ServiceProfileCard from "./ServiceProfileCard";
+
 import { IUserDTO } from "@interfaces/IUser";
-import { useEffect, useState } from "react";
 import { useAuth } from "@contexts/AuthContext";
 import { getUserDTO } from "@services/userServices";
 
@@ -33,7 +34,7 @@ export default function ServiceProfile() {
           setCloseMenu={setCloseMenu}
         />
       ) : null}
-      <ServiceProfileCard loggedUserDTO={loggedUserDTO} setCloseMenu={setCloseMenu} />
+      <ServiceProfileCard loggedUserDTO={loggedUserDTO} closeMenu={closeMenu} setCloseMenu={setCloseMenu} />
     </div>
   );
 }

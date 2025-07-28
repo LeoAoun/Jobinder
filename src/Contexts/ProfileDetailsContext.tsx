@@ -1,15 +1,15 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { UserDTO } from "../../interfaces/IUser";
+import { IUserDTO } from "@interfaces/IUser";
 
 interface ProfileDetailsContextType {
-  profileDetails: UserDTO | null;
-  setProfileDetails: React.Dispatch<React.SetStateAction<UserDTO | null>>;
+  profileDetails: IUserDTO | null;
+  setProfileDetails: React.Dispatch<React.SetStateAction<IUserDTO | null>>;
 }
 
 const ProfileDetailsContext = createContext<ProfileDetailsContextType | undefined>(undefined);
 
 export const ProfileDetailsProvider = ({ children }: { children: ReactNode }) => {
-  const [profileDetails, setProfileDetails] = useState<UserDTO | null>(null);
+  const [profileDetails, setProfileDetails] = useState<IUserDTO | null>(null);
 
   return (
     <ProfileDetailsContext.Provider value={{ profileDetails, setProfileDetails }}>

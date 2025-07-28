@@ -1,15 +1,15 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { User } from "../../interfaces/IUser";
+import { IUser } from "@interfaces/IUser";
 
 interface UsersContextType {
-  users: Record<string, User>;
-  setUsers: React.Dispatch<React.SetStateAction<Record<string, User>>>;
+  users: Record<string, IUser>;
+  setUsers: React.Dispatch<React.SetStateAction<Record<string, IUser>>>;
 }
 
 const UserContext = createContext<UsersContextType | undefined>(undefined);
 
 export const UsersProvider = ({ children }: { children: ReactNode }) => {
-  const [users, setUsers] = useState<Record<string, User>>({});
+  const [users, setUsers] = useState<Record<string, IUser>>({});
 
   return <UserContext.Provider value={{ users, setUsers }}>{children}</UserContext.Provider>;
 };

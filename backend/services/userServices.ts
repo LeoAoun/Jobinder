@@ -1,4 +1,4 @@
-import { IServiceProfile, IUser, IUserDTO } from "../../interfaces/IUser";
+import { IServiceProfile, IUser, IUserDTO } from "@interfaces/IUser";
 
 // Storage key for users
 const jobinderUsersStorageKey = "jobinder-users";

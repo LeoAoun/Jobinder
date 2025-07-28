@@ -5,17 +5,18 @@ import { useEffect } from "react";
 
 interface ServiceProfileCardProps {
   loggedUserDTO: IUserDTO | null;
+  closeMenu: boolean;
   setCloseMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ServiceProfileCard({
   loggedUserDTO,
+  closeMenu,
   setCloseMenu,
 }: ServiceProfileCardProps) {
   // UseEffect to see the changes in width
   useEffect(() => {
     const handleResize = () => {
-      console.log(window.innerWidth);
       if (window.innerWidth > 900) {
         setCloseMenu(false);
       } else {
@@ -55,9 +56,11 @@ export default function ServiceProfileCard({
         </div>
       </div>
 
-      <button className="open-menu" onClick={() => setCloseMenu(false)}>
-        Menu
-      </button>
+      {closeMenu && (
+        <button className="open-menu" onClick={() => setCloseMenu(false)}>
+          Menu
+        </button>
+      )}
     </div>
   );
 }

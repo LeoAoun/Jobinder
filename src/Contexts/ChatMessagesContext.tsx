@@ -1,15 +1,15 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { ChatMessages } from "../../interfaces/IChat";
+import { IChatMessages } from "@interfaces/IChat";
 
 interface ChatMessagesContextType {
-  chatMessages: ChatMessages | null;
-  setChatMessages: React.Dispatch<React.SetStateAction<ChatMessages | null>>;
+  chatMessages: IChatMessages | null;
+  setChatMessages: React.Dispatch<React.SetStateAction<IChatMessages | null>>;
 }
 
 const ChatMessagesContext = createContext<ChatMessagesContextType | undefined>(undefined);
 
 export const ChatMessagesProvider = ({ children }: { children: ReactNode }) => {
-  const [chatMessages, setChatMessages] = useState<ChatMessages | null>(null);
+  const [chatMessages, setChatMessages] = useState<IChatMessages | null>(null);
 
   return (
     <ChatMessagesContext.Provider value={{ chatMessages, setChatMessages }}>

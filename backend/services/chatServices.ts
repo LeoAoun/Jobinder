@@ -1,4 +1,4 @@
-import { IMessage, IChatMessages, IChats } from "../../interfaces/IChat";
+import { IMessage, IChatMessages, IChats } from "@interfaces/IChat";
 import { v4 as uuidv4 } from "uuid";
 
 // Storage key for chats

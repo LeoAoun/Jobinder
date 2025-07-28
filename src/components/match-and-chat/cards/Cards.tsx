@@ -16,7 +16,7 @@ import { addMatch, getMatches } from "@services/matchServices.ts";
 interface CardsProps {
   profiles: IUserDTO[];
   setProfiles: React.Dispatch<React.SetStateAction<IUserDTO[]>>;
-  filterTerm: string; // Novo valor de filtro para buscar
+  filterTerm: string;
 }
 
 export default function Cards({ profiles, setProfiles, filterTerm }: CardsProps) {

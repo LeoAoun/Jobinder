@@ -1,4 +1,4 @@
-import { IMatch, IMatches } from "../../interfaces/IMatch";
+import { IMatch, IMatches } from "@interfaces/IMatch";
 
 // Storage key for matches
 const jobinderMatchesStorageKey = "jobinder-matches";
@@ -19,34 +19,35 @@ const getMatch = async (id: string): Promise<IMatch> => {
 const addMatch = async (matchId: string, matchedId: string) => {
   const matches: IMatches = await getMatches();
 
-  // Update match for the first user
-  const updatedMatchesForMatchId: IMatch = [...(matches[matchId] || []), matchedId];
+  // Create a new match entry if it doesn't exist
+  const newMatches = { ...matches };
 
-  // Update match for the second user
-  const updatedMatchesForMatchedId: IMatch = [...(matches[matchedId] || []), matchId];
+  // If the matchId is not already in the matchId's array, add it
+  newMatches[matchId] = [...(newMatches[matchId] || []), matchedId];
 
-  // Update matches object
-  const newMatches: IMatches = {
-    ...matches,
-    [matchId]: updatedMatchesForMatchId,
-    [matchedId]: updatedMatchesForMatchedId,
-  };
+  // If the matchedId is not already in the matchId's array, add it
+  if (matchId !== "-1" && matchId !== matchedId) {
+    newMatches[matchedId] = [...(newMatches[matchedId] || []), matchId];
+  }
 
   localStorage.setItem(jobinderMatchesStorageKey, JSON.stringify(newMatches));
 };
 
+// Delete match from database
 const deleteMatch = async (matchId: string, matchedId: string) => {
   const matches: IMatches = await getMatches();
 
-  // Update match for the first user
-  const updatedMatchesForMatchId: IMatch = matches[matchId].filter((id: string) => id !== matchedId);
+  // Remove the matchId from the matchedId's array
+  const updatedMatchesForMatchId: IMatch = (matches[matchId] || []).filter( // CORREÇÃO AQUI
+    (id: string) => id !== matchedId
+  );
 
-  // Update match for the second user
-  const updatedMatchesForMatchedId: IMatch = matches[matchedId].filter(
+  // Remove the matchedId from the matchId's array
+  const updatedMatchesForMatchedId: IMatch = (matches[matchedId] || []).filter( // CORREÇÃO AQUI
     (id: string) => id !== matchId
   );
 
-  // Update matches object
+  // Update the matches object
   const newMatches: IMatches = {
     ...matches,
     [matchId]: updatedMatchesForMatchId,

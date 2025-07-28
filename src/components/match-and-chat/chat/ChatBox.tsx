@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 
 import noServiceImg from "@assets/no-service-img.webp";
+import ProfileDetailsModal from "../../profile-details/ProfileDetailsModal";
 
 import { IUserDTO } from "@interfaces/IUser";
 import { useAuth } from "@contexts/AuthContext";
 
 import { getLastMessagePrivateChat } from "../../../../backend/services/chatServices";
+import { useProfileDetails } from "@contexts/ProfileDetailsContext";
 
 interface ChatBoxProps {
   filteredUsers: IUserDTO[];
@@ -21,6 +23,9 @@ export default function ChatBox({
   setOpenDeleteMatchModal,
 }: ChatBoxProps) {
   const { loggedUserId } = useAuth();
+  
+  const { profileDetails, setProfileDetails } = useProfileDetails();
+
   const [lastMessages, setLastMessages] = useState<Record<string, string | null>>({});
 
   // Fetch last messages for all filtered users
@@ -47,7 +52,8 @@ export default function ChatBox({
   };
 
   const handleOpenPrivateChat = (userDTO: IUserDTO) => {
-    setPrivateChatUser(userDTO);
+    if (loggedUserId !== "-1") setPrivateChatUser(userDTO);
+    else setProfileDetails(userDTO);
   };
 
   // Extract the first and last names from the full name
@@ -65,36 +71,45 @@ export default function ChatBox({
   };
 
   return (
-    <ul className="chat-list">
-      {filteredUsers.map((user, index) => {
-        const [firstName, lastName] = extractNames(user.fullName);
-        const lastMessage = truncateMessage(lastMessages[user.phone]);
+    <>
+      <ul className="chat-list">
+        {filteredUsers.map((user, index) => {
+          const [firstName, lastName] = extractNames(user.fullName);
+          const lastMessage = truncateMessage(lastMessages[user.phone]);
 
-        return (
-          <li
-            key={user.phone || index}
-            className="chat-box"
-            onClick={() => handleOpenPrivateChat(user)}
-          >
-            <div className="chat-box-info">
-              <img className="img" src={user.serviceProfile?.serviceImg ? user.serviceProfile?.serviceImg : noServiceImg} />
-              <div className="name-and-last-message">
-                <span className="name">{`${firstName} ${lastName}`}</span>
-                <span className="last-message">{lastMessage}</span>
-              </div>
-            </div>
-            <button
-              className="delete-match"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleDeleteMatch(user);
-              }}
+          return (
+            <li
+              key={user.phone || index}
+              className="chat-box"
+              onClick={() => handleOpenPrivateChat(user)}
             >
-              X
-            </button>
-          </li>
-        );
-      })}
-    </ul>
+              <div className="chat-box-info">
+                <img
+                  className="img"
+                  src={
+                    user.serviceProfile?.serviceImg ? user.serviceProfile?.serviceImg : noServiceImg
+                  }
+                />
+                <div className="name-and-last-message">
+                  <span className="name">{`${firstName} ${lastName}`}</span>
+                  <span className="last-message">{lastMessage}</span>
+                </div>
+              </div>
+              <button
+                className="delete-match"
+                onClick={(e) => {
+                  e.stopPropagation(); 
+                  handleDeleteMatch(user);
+                }}
+              >
+                X
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+      {profileDetails && <ProfileDetailsModal />}
+    </>
   );
 }

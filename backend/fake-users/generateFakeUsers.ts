@@ -2,7 +2,7 @@ import axios from "axios";
 import bcrypt from "bcryptjs-react";
 import { getCities } from "../services/locationServices";
 
-import { IUser } from "../../interfaces/IUser";
+import { IUser } from "@interfaces/IUser";
 import { createUsers } from "../services/userServices";
 import {
   advocaciaServices,
