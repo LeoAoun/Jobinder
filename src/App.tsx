@@ -1,8 +1,9 @@
 import "./styles/App.css";
 import { useEffect } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 
 import ROUTES from "@routes";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 
 import Home from "./components/home/Home";
 import Register from "./components/login-register/Register";
@@ -56,16 +57,35 @@ const App = () => {
         <Route path={ROUTES.Home} element={<Home />} />
         <Route path={ROUTES.Register} element={<Register />} />
         <Route path={ROUTES.Login} element={<Login />} />
+
         <Route path="/create-service-profile">
           <Route path={ROUTES.CreateServiceProfileCategories} element={<ChooseCategory />} />
           <Route path={ROUTES.CreateServiceProfileDetails} element={<Details />} />
         </Route>
+
         <Route path={ROUTES.ServiceCategories} element={<ServiceCategories />} />
         <Route path={ROUTES.MatchAndChat} element={<MatchAndChat />} />
-        <Route path={ROUTES.ServiceProfile} element={<ServiceProfile />} />
-        <Route path="/update-service-profile">
+
+        <Route
+          path={ROUTES.ServiceProfile}
+          element={
+            <ProtectedRoute>
+              <ServiceProfile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/update-service-profile"
+          element={
+            <ProtectedRoute>
+              <Outlet />
+            </ProtectedRoute>
+          }
+        >
           <Route path={ROUTES.UpdateServiceProfileSpecialty} element={<EditSpecialty />} />
         </Route>
+        
         <Route path="*" element={<Navigate to={ROUTES.Home} replace />} />
       </Routes>
     </div>

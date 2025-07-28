@@ -40,7 +40,7 @@ export default function HomeMenuLogged() {
         </Link>
       ) : (
         <Link className="create-service-profile" to="/create-service-profile/categories">
-          <span>CRIAR PERFIL</span>
+          <span>CRIAR PERFIL DE SERVIÇOS</span>
         </Link>
       )}
       <span className="exit-login" onClick={handleExitLogin}>
