@@ -114,32 +114,38 @@ export default function Cards({ profiles, setProfiles, filterTerm }: CardsProps)
 
   return (
     <div className="card-container">
-      {filteredProfiles.map((profile) => (
-        <TinderCard
-          key={profile.phone}
-          className="swipe"
-          preventSwipe={["up", "down"]}
-          onSwipe={(dir) => handleSwipe(dir, profile)}
-        >
-          <div
-            className="card"
-            onDoubleClick={() => handleUserDetails(profile)}
-            onPointerDown={() => handlePointerDown(profile)}
-            onPointerUp={handlePointerUp}
-            onPointerCancel={handlePointerUp}
-            onPointerMove={handlePointerMove}
+      {filteredProfiles.length > 0 ? (
+        filteredProfiles.map((profile) => (
+          <TinderCard
+            key={profile.phone}
+            className="swipe"
+            preventSwipe={["up", "down"]}
+            onSwipe={(dir) => handleSwipe(dir, profile)}
           >
-            <CardInfo profile={profile} />
-            <CardButtons
-              profile={profile}
-              removedProfiles={removedProfiles}
-              handleSwipe={handleSwipe}
-              setRemovedProfiles={setRemovedProfiles}
-              setProfiles={setProfiles}
-            />
-          </div>
-        </TinderCard>
-      ))}
+            <div
+              className="card"
+              onDoubleClick={() => handleUserDetails(profile)}
+              onPointerDown={() => handlePointerDown(profile)}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerUp}
+              onPointerMove={handlePointerMove}
+            >
+              <CardInfo profile={profile} />
+              <CardButtons
+                profile={profile}
+                removedProfiles={removedProfiles}
+                handleSwipe={handleSwipe}
+                setRemovedProfiles={setRemovedProfiles}
+                setProfiles={setProfiles}
+              />
+            </div>
+          </TinderCard>
+        ))
+      ) : (
+        <div className="no-more-profiles">
+          <span>Não há mais perfis com esta categoria.</span>
+        </div>
+      )}
     </div>
   );
 }
